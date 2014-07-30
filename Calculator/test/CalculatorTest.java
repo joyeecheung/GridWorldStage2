@@ -19,7 +19,6 @@ public class CalculatorTest {
         double delta = 1E-6;
         double result = 0.0;
        
-        System.out.println("Testing calculate()"); 
         result = calculate(1.0, "+", 1.0); 
         assertEquals("Failure[+]: 1.0 + 1.0 falis.", result, 1.0 + 1.0, delta);
 
@@ -31,5 +30,26 @@ public class CalculatorTest {
 
         result = calculate(1.0, "/", 1.0); 
         assertEquals("Failure[/]: 1.0 / 1.0 falis.", result, 1.0 / 1.0, delta);
+    }
+    
+    @Test
+    public void Zerotest() {
+        double delta = 1E-6;
+        double result = 0.0;
+       
+        result = calculate(0.0, "+", 1.0); 
+        assertEquals("Failure[+]: 0.0 + 1.0 falis.", result, 0.0 + 1.0, delta);
+
+        result = calculate(0.0, "-", 1.0); 
+        assertEquals("Failure[-]: 0.0 - 1.0 falis.", result, 0.0 - 1.0, delta);
+
+        result = calculate(0.0, "*", 1.0); 
+        assertEquals("Failure[*]: 0.0 * 1.0 falis.", result, 0.0 * 1.0, delta);
+
+        result = calculate(0.0, "/", 1.0); 
+        assertEquals("Failure[/]: 0.0 / 1.0 falis.", result, 0.0 / 1.0, delta);
+        
+        result = calculate(1.0, "/", 0.0); 
+        assertEquals("Failure[/]: 1.0 / 0.0 falis.", result, 1.0 / 0.0, delta);
     }
 }
