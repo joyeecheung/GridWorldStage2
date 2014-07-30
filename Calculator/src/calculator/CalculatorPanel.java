@@ -95,7 +95,7 @@ public class CalculatorPanel extends JPanel {
      *            right operand
      * @return result of a op b. If op is invalid, return NaN.
      */
-    public double calculate(double a, String op, double b) {
+    public static double calculate(double a, String op, double b) {
         if (op.equals("+")) {
             return a + b;
         } else if (op.equals("-")) {

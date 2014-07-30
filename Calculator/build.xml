@@ -1,15 +1,25 @@
 <project name="Calculator" default="main" basedir=".">
     <property name="src.dir" value="src"/>
     <property name="build.dir" value="build"/>
+    <property name="lib.dir" value="lib"/>
     <property name="test.dir" value="test"/>
 
     <property name="classes.dir" value="${build.dir}/classes"/>
     <property name="jar.dir" value="${build.dir}/jar"/>
-    <property name="report.dir" value="${build.dir}/junitreport"/>
+    <property name="report.dir" value="${build.dir}/report"/>
 
     <property name="main-class" value="calculator.Calculator"/>
 
     <path id="application" location="${jar.dir}/${ant.project.name}.jar"/>
+
+    <path id="classpath">
+        <fileset dir="${lib.dir}" includes="**/*.jar"/>
+    </path>
+
+    <path id="test-classpath">
+        <path refid="classpath"/> 
+        <path location="${classes.dir}"/>
+    </path>
 
     <target name="clean">
         <delete dir="${build.dir}" />
@@ -17,10 +27,14 @@
 
     <target name="compile">
         <mkdir dir="${classes.dir}"/>
-        <javac srcdir="${src.dir}" destdir="${classes.dir}"/>
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" includeantruntime="true"/>
     </target>
 
-    <target name="jar" depends="compile">
+     <target name="compile-test" depends="compile">
+        <javac srcdir="${test.dir}" destdir="${classes.dir}" classpathref="test-classpath" includeantruntime="true"/>
+    </target>
+
+   <target name="jar" depends="compile">
         <mkdir dir="${jar.dir}"/>
         <jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}">
             <manifest>
@@ -37,20 +51,18 @@
         </java>
     </target>
 
-    <target name="junit" depends="jar">
+    <target name="test" depends="compile-test">
         <mkdir dir="${report.dir}"/>
         <junit printsummary="yes">
-            <classpath>
-                <path refid="application"/>
-            </classpath>
+            <classpath refid="test-classpath"></classpath>
             <formatter type="xml"/>
             <batchtest fork="yes" todir="${report.dir}">
-                <fileset dir="${test.dir}" includes="*Test.java"/> 
+                <fileset dir="${classes.dir}" includes="*Test.class"/> 
             </batchtest>
         </junit> 
     </target>
 
-    <target name="junitreport">
+    <target name="report">
         <junitreport todir="${report.dir}">
             <fileset dir="${report.dir}" includes="TEST-*.xml"/>
             <report todir="${report.dir}"/>
