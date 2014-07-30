@@ -1,4 +1,5 @@
 import info.gridworld.actor.ActorWorld;
+import info.gridworld.actor.Actor;
 import info.gridworld.actor.SpiralBug;
 import info.gridworld.grid.UnboundedGrid;
 import info.gridworld.grid.Location;
@@ -11,8 +12,9 @@ public class SpiralBugRunner
 {
     public static void main(String[] args)
     {
-        ActorWorld world = new ActorWorld();
-        world.add(new Location(4, 4), new SpiralBug(2));
+        UnboundedGrid grid = new UnboundedGrid<Actor>();
+        ActorWorld world = new ActorWorld(grid);
+        world.add(new Location(8, 8), new SpiralBug(2));
         world.show();
     }
 }
