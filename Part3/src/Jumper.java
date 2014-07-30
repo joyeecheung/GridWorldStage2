@@ -1,5 +1,3 @@
-package info.gridworld.actor;
-
 import info.gridworld.actor.Actor;
 import info.gridworld.actor.Flower;
 import info.gridworld.actor.Rock;
@@ -13,13 +11,14 @@ import java.awt.Color;
  */
 public class Jumper extends Actor
 {
+    private static final Color DEFAULT_COLOR = Color.PINK;
 
     /**
      * Constructs a yellow Jumper.
      */
     public Jumper()
     {
-        setColor(Color.PINK);
+        setColor(DEFAULT_COLOR);
     }
 
     /**
