@@ -1,4 +1,4 @@
-<project name="Part1" default="main" basedir=".">
+<project name="Part2" default="main" basedir=".">
     <property name="src.dir" value="src"/>
     <property name="build.dir" value="build"/>
     <property name="lib.dir" value="lib"/>
