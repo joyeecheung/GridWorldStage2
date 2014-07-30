@@ -1,5 +1,3 @@
-package info.gridworld.actor;
-
 import info.gridworld.actor.Bug;
 
 /**

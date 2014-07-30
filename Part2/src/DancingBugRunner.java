@@ -1,5 +1,4 @@
 import info.gridworld.actor.ActorWorld;
-import info.gridworld.actor.DancingBug;
 
 /**
  * This class runs a world that contains a dancing bug,

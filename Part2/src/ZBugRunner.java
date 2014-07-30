@@ -1,5 +1,4 @@
 import info.gridworld.actor.ActorWorld;
-import info.gridworld.actor.ZBug;
 import info.gridworld.grid.Location;
 
 /**

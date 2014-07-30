@@ -1,6 +1,5 @@
 import info.gridworld.actor.ActorWorld;
 import info.gridworld.actor.Actor;
-import info.gridworld.actor.SpiralBug;
 import info.gridworld.grid.UnboundedGrid;
 import info.gridworld.grid.Location;
 
