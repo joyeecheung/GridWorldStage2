@@ -7,7 +7,9 @@ import info.gridworld.actor.Bug;
  */
 public class CircleBug extends Bug
 {
+    // steps in current part
     private int steps;
+    // side length of the octagon
     private int sideLength;
 
     /**

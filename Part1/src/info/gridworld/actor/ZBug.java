@@ -8,9 +8,12 @@ import info.gridworld.grid.Location;
  */
 public class ZBug extends Bug
 {
-    private int steps; // steps finished in the current part
-    private int sideLength; // length of each part
-    private int part; // indicates which part the bug is in
+    // steps finished in the current part
+    private int steps;
+    // length of each part
+    private int sideLength;
+    // indicates which part the bug is in
+    private int part;
 
     /**
      * Constructs a z bug that moves in a "Z" pattern.

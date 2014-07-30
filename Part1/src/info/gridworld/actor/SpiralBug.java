@@ -7,7 +7,9 @@ import info.gridworld.actor.Bug;
  */
 public class SpiralBug extends Bug
 {
+    // steps in current part
     private int steps;
+    // side length of current part
     private int sideLength;
 
     /**

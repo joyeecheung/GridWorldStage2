@@ -7,8 +7,10 @@ import info.gridworld.actor.Bug;
  */
 public class DancingBug extends Bug
 {
-    private int steps; // step in the current loop
-    private int[] turns; // number of turns for each step
+    // step in the current loop
+    private int steps;
+    // number of turns for each step
+    private int[] turns;
 
     /**
      * Constructs a dancing bug that makes different turns before each move
