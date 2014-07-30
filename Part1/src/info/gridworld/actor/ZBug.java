@@ -43,13 +43,15 @@ public class ZBug extends Bug
                 steps++;
             }
         }
-        else if (part == 0) // end of the first part --
+        // end of the first part --
+        else if (part == 0)
         {
             setDirection(Location.SOUTHWEST);
             part++;
             steps = 0;
         }
-        else if (part == 1) // end of the second part /
+        // end of the second part /
+        else if (part == 1)
         {
             setDirection(Location.EAST);
             part++;
