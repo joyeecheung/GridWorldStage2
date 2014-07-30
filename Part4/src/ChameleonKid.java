@@ -25,7 +25,9 @@ public class ChameleonKid extends ChameleonCritter
         {
             Actor a = getGrid().get(loc);
             if (a != null)
+            {
                 actors.add(a);
+            }
         }
 
         return actors;
@@ -50,7 +52,9 @@ public class ChameleonKid extends ChameleonCritter
         {
             Location neighborLoc = loc.getAdjacentLocation(getDirection() + d);
             if (gr.isValid(neighborLoc))
+            {
                 locs.add(neighborLoc);
+            }
         }
         return locs;
     }    

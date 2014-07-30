@@ -49,7 +49,9 @@ public class BlusterCritter extends Critter
                 {
                     Actor a = grid.get(checkedLoc);
                     if(a != null && a != this)
+                    {
                         actors.add(a);
+                    }
                 }
             }
         }
@@ -84,10 +86,10 @@ public class BlusterCritter extends Critter
     {
         int delta = brighter ? 10 : -10;
 
-        Color c = getColor();
-        int red = channelFilter(c.getRed(), delta);
-        int blue = channelFilter(c.getBlue(), delta);
-        int green = channelFilter(c.getGreen(), delta);
+        Color color = getColor();
+        int red = channelFilter(color.getRed(), delta);
+        int blue = channelFilter(color.getBlue(), delta);
+        int green = channelFilter(color.getGreen(), delta);
 
         setColor(new Color(red, green, blue));
         return;
@@ -100,9 +102,9 @@ public class BlusterCritter extends Critter
      */
     private int channelFilter(int channel, int delta)
     {
-        channel = channel + delta;
-        channel = channel >= 255 ? 255 : channel;
-        channel = channel < 0 ? 0 : channel;
-        return channel;
+        int result = channel + delta;
+        result = result >= 255 ? 255 : result;
+        result = result < 0 ? 0 : result;
+        return result;
     }
 }

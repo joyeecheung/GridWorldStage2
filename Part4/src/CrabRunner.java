@@ -17,28 +17,33 @@
  */
 
 import info.gridworld.actor.ActorWorld;
+import info.gridworld.actor.Bug;
+import info.gridworld.actor.Flower;
 import info.gridworld.actor.Rock;
 import info.gridworld.grid.Location;
 
-import java.awt.Color;
-
 /**
- * This class runs a world that contains chameleon critters. <br />
+ * This class runs a world that contains crab critters. <br />
  * This class is not tested on the AP CS A and AB exams.
  */
-public class ChameleonRunner
+public class CrabRunner
 {
     public static void main(String[] args)
     {
         ActorWorld world = new ActorWorld();
         world.add(new Rock());
         world.add(new Rock());
-        world.add(new Rock(Color.BLUE));
-        world.add(new Rock(Color.PINK));
-        world.add(new Rock(Color.RED));
-        world.add(new Rock(Color.YELLOW));
-        world.add(new ChameleonCritter());
-        world.add(new ChameleonCritter());
+        world.add(new Rock());
+        world.add(new Rock());
+        world.add(new Flower());
+        world.add(new Flower());
+        world.add(new Flower());
+        world.add(new Flower());
+        world.add(new Bug());
+        world.add(new Bug());
+        world.add(new CrabCritter());
+        world.add(new CrabCritter());
+        world.add(new CrabCritter());
         world.show();
     }
 }
