@@ -19,7 +19,6 @@
 import info.gridworld.actor.ActorWorld;
 import info.gridworld.actor.Rock;
 import info.gridworld.grid.Location;
-import info.gridworld.actor.ChameleonCritter;
 
 import java.awt.Color;
 
