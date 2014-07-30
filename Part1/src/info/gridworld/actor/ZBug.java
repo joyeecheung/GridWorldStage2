@@ -8,13 +8,15 @@ import info.gridworld.grid.Location;
  */
 public class ZBug extends Bug
 {
-    private int steps;  // steps finished in the current part
-    private int sideLength;  // length of each part
-    private int part;  // indicates which part the bug is in
+    private int steps; // steps finished in the current part
+    private int sideLength; // length of each part
+    private int part; // indicates which part the bug is in
 
     /**
-     * Constructs a spiral bug that moves in a "Z" pattern.
-     * @param length the side length
+     * Constructs a z bug that moves in a "Z" pattern.
+     * 
+     * @param length
+     *            the side length
      */
     public ZBug(int length)
     {
@@ -38,15 +40,15 @@ public class ZBug extends Bug
                 steps++;
             }
         }
-        else if (part == 0)  // end of the first part --
+        else if (part == 0) // end of the first part --
         {
-            setDirection(Location.SOUTHWEST); 
+            setDirection(Location.SOUTHWEST);
             part++;
             steps = 0;
         }
-        else if (part == 1)  // end of the second part /
+        else if (part == 1) // end of the second part /
         {
-            setDirection(Location.EAST); 
+            setDirection(Location.EAST);
             part++;
             steps = 0;
         }

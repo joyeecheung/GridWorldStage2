@@ -1,3 +1,5 @@
 .sonar
 build
 lib
+.classpath
+.project

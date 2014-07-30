@@ -3,7 +3,7 @@ package info.gridworld.actor;
 import info.gridworld.actor.Bug;
 
 /**
- * The bug drops flowers in a spiral pattern. 
+ * The bug that drops flowers in a spiral pattern.
  */
 public class SpiralBug extends Bug
 {
@@ -12,7 +12,9 @@ public class SpiralBug extends Bug
 
     /**
      * Constructs a spiral bug that drops flowers in a spiral pattern.
-     * @param length the side length
+     * 
+     * @param length
+     *            the side length
      */
     public SpiralBug(int length)
     {

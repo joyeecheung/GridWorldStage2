@@ -1,19 +1,20 @@
 package info.gridworld.actor;
 
 import info.gridworld.actor.Bug;
-import info.gridworld.grid.Location;
 
 /**
  * The bug that makes different turns before each move.
  */
 public class DancingBug extends Bug
 {
-    private int steps;  // step in the current loop
-    private int[] turns;  // number of turns for each step
+    private int steps; // step in the current loop
+    private int[] turns; // number of turns for each step
 
     /**
      * Constructs a dancing bug that makes different turns before each move
-     * @param turns number of turns for each step.
+     * 
+     * @param turns
+     *            number of turns for each step.
      */
     public DancingBug(int[] turns)
     {
@@ -23,7 +24,9 @@ public class DancingBug extends Bug
 
     /**
      * Turns given number of times.
-     * @param times number of turns for this move.
+     * 
+     * @param times
+     *            number of turns for this move.
      */
     public void turn(int times)
     {

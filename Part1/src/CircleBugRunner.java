@@ -2,8 +2,8 @@ import info.gridworld.actor.ActorWorld;
 import info.gridworld.actor.CircleBug;
 
 /**
- * This class runs a world that contains a bug and a rock, added at random
- * locations. 
+ * This class runs a world that contains a circle bug,
+ * added at random locations.
  */
 public class CircleBugRunner
 {

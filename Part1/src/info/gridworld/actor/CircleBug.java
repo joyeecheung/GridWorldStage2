@@ -12,7 +12,9 @@ public class CircleBug extends Bug
 
     /**
      * Constructs a circle bug that traces a octagon of a given side length
-     * @param length the side length
+     * 
+     * @param length
+     *            the side length
      */
     public CircleBug(int length)
     {
