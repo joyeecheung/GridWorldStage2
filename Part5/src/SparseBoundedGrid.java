@@ -84,7 +84,7 @@ public class SparseBoundedGrid<E> extends AbstractGrid<E>
         {
             throw new IllegalArgumentException("Location " + loc
                     + " is not valid");
-        }        
+        }
         SparseGridNode p = occupantArray[loc.getRow()];
 
         // find the object in the linked list
