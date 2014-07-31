@@ -4,6 +4,7 @@ import info.gridworld.actor.Flower;
 import info.gridworld.actor.Rock;
 
 import java.awt.Color;
+
 /**
  * This class runs a world that contains BlusterCritters.
  */

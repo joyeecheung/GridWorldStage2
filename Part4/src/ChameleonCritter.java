@@ -23,7 +23,7 @@ public class ChameleonCritter extends Critter
     {
         setColor(DEFAULT_COLOR);
     }
-    
+
     /**
      * Randomly selects a neighbor and changes this critter's color to be the
      * same as that neighbor's. If there are no neighbors, it will darken.

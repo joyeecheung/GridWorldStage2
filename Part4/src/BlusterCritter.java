@@ -21,7 +21,9 @@ public class BlusterCritter extends Critter
 
     /**
      * Constructs a BlusterCritter with c as color changing factor.
-     * @param c the given number of critters.
+     * 
+     * @param c
+     *            the given number of critters.
      */
     public BlusterCritter(int c)
     {

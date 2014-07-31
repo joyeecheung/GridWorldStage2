@@ -22,7 +22,7 @@ public class RockHound extends Critter
     {
         setColor(DEFAULT_COLOR);
     }
-    
+
     /**
      * Removes any rocks in neighborhood.
      */
