@@ -1,4 +1,4 @@
-/* 
+/*
  * AP(r) Computer Science GridWorld Case Study:
  * Copyright(c) 2005-2006 Cay S. Horstmann (http://horstmann.com)
  *
@@ -10,7 +10,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * @author Chris Nevison
  * @author Barbara Cloud Wells
  * @author Cay Horstmann
@@ -20,7 +20,6 @@ import info.gridworld.actor.ActorWorld;
 import info.gridworld.actor.Bug;
 import info.gridworld.actor.Flower;
 import info.gridworld.actor.Rock;
-import info.gridworld.grid.Location;
 
 /**
  * This class runs a world that contains crab critters. <br />

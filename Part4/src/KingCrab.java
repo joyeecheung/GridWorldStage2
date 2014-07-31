@@ -1,24 +1,26 @@
 import info.gridworld.actor.Actor;
-import info.gridworld.actor.Rock;
 import info.gridworld.actor.Flower;
-import info.gridworld.actor.Critter;
-import info.gridworld.grid.Grid;
+import info.gridworld.actor.Rock;
 import info.gridworld.grid.Location;
 
-import java.awt.Color;
 import java.util.ArrayList;
 
 /**
  * A KingCrab causes each actor that it processes
- * to move one location further away from the KingCrab. 
- * If the actor cannot move away, the KingCrab removes it from the grid. 
+ * to move one location further away from the KingCrab.
+ * If the actor cannot move away, the KingCrab removes it from the grid.
+ * 
+ * @author joyeecheung
  */
 public class KingCrab extends CrabCritter
 {
     /**
      * Check if two location is adjacent (in eight directions).
-     * @param loca first of the location
-     * @param locb second of the location
+     * 
+     * @param loca
+     *            first of the location
+     * @param locb
+     *            second of the location
      */
     private boolean isAdjacent(Location loca, Location locb)
     {
@@ -27,12 +29,14 @@ public class KingCrab extends CrabCritter
         int x2 = locb.getRow();
         int y2 = locb.getCol();
         double dist = Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
-        return ((int)Math.floor(dist + 0.5)) <= 1;
+        return ((int) Math.floor(dist + 0.5)) <= 1;
     }
 
     /**
      * Move the actor away if it can.
-     * @param a the poor actor.
+     * 
+     * @param a
+     *            the poor actor.
      */
     private boolean moveAway(Actor a)
     {
@@ -43,10 +47,10 @@ public class KingCrab extends CrabCritter
 
         // get all locations that a can run away to
         ArrayList<Location> locs =
-            getGrid().getEmptyAdjacentLocations(a.getLocation());
+                getGrid().getEmptyAdjacentLocations(a.getLocation());
 
         // check if there is a location away from the king crab
-        for (Location loc: locs)
+        for (Location loc : locs)
         {
             // there is such a location, run away!
             if (!isAdjacent(getLocation(), loc))
@@ -63,8 +67,9 @@ public class KingCrab extends CrabCritter
     /**
      * Causes each actor that it processes to move one location further
      * away from the KingCrab. If the actor cannot move away,
-     * the KingCrab removes it from the grid. 
+     * the KingCrab removes it from the grid.
      */
+    @Override
     public void processActors(ArrayList<Actor> actors)
     {
         for (Actor a : actors)

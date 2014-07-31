@@ -1,9 +1,5 @@
 import info.gridworld.actor.ActorWorld;
-import info.gridworld.actor.Rock;
 import info.gridworld.actor.Critter;
-import info.gridworld.grid.Location;
-
-import java.awt.Color;
 
 /**
  * This class runs a world that contains BlusterCritters.

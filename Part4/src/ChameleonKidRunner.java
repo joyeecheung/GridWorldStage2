@@ -1,11 +1,10 @@
 import info.gridworld.actor.ActorWorld;
 import info.gridworld.actor.Rock;
-import info.gridworld.grid.Location;
 
 import java.awt.Color;
 
 /**
- * This class runs a world that contains chameleon critters. 
+ * This class runs a world that contains chameleon critters.
  */
 public class ChameleonKidRunner
 {
