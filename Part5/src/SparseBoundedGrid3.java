@@ -1,13 +1,19 @@
 import info.gridworld.grid.AbstractGrid;
-import info.gridworld.grid.Grid;
 import info.gridworld.grid.Location;
+
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Map;
+
 /**
  * A SparseBoundedGrid is a rectangular grid with a finite
- * number of rows and columns and a sparse array implementation. 
+ * number of rows and columns and a sparse array implementation.
  * This is the HashMap version.
+ * 
+ * @author joyeecheung
+ *
+ * @param <E>
+ *            Type of occupants in the grids.
  */
 public class SparseBoundedGrid3<E> extends AbstractGrid<E>
 {
@@ -16,7 +22,13 @@ public class SparseBoundedGrid3<E> extends AbstractGrid<E>
     private int cols;
 
     /**
-     * Constructs an empty unbounded grid.
+     * Constructs an empty bounded grid with the given dimensions.
+     * (Precondition: <code>rows > 0</code> and <code>cols > 0</code>.)
+     * 
+     * @param rows
+     *            number of rows in BoundedGrid
+     * @param cols
+     *            number of columns in BoundedGrid
      */
     public SparseBoundedGrid3(int rows, int cols)
     {
@@ -36,22 +48,47 @@ public class SparseBoundedGrid3<E> extends AbstractGrid<E>
         occupantMap = new HashMap<Location, E>();
     }
 
+    /**
+     * Get number of rows.
+     * 
+     * @return number of rows.
+     */
+    @Override
     public int getNumRows()
     {
         return rows;
     }
 
+    /**
+     * Get number of columns.
+     * 
+     * @return number of columns.
+     */
+    @Override
     public int getNumCols()
     {
         return cols;
     }
 
+    /**
+     * Check if the given location is valid in this grid.
+     * 
+     * @return true if the given location is valid in this grid.
+     */
+    @Override
     public boolean isValid(Location loc)
     {
         return 0 <= loc.getRow() && loc.getRow() < getNumRows()
-            && 0 <= loc.getCol() && loc.getCol() < getNumCols();
+                && 0 <= loc.getCol() && loc.getCol() < getNumCols();
     }
 
+    /**
+     * Get occupied locations in this grid.
+     * 
+     * @return an ArrayList of Location containing occupied
+     *         locations in this grid.
+     */
+    @Override
     public ArrayList<Location> getOccupiedLocations()
     {
         ArrayList<Location> theLocations = new ArrayList<Location>();
@@ -63,6 +100,12 @@ public class SparseBoundedGrid3<E> extends AbstractGrid<E>
         return theLocations;
     }
 
+    /**
+     * Get the content in given location.
+     * 
+     * @return the content in given location.
+     */
+    @Override
     public E get(Location loc)
     {
         if (loc == null)
@@ -79,6 +122,12 @@ public class SparseBoundedGrid3<E> extends AbstractGrid<E>
         return occupantMap.get(loc);
     }
 
+    /**
+     * Put the given object in given location.
+     * 
+     * @return the original content in the location.
+     */
+    @Override
     public E put(Location loc, E obj)
     {
         if (loc == null)
@@ -96,11 +145,17 @@ public class SparseBoundedGrid3<E> extends AbstractGrid<E>
         {
             throw new IllegalArgumentException("obj == null");
         }
-        
+
         //Add the object to the grid.
         return occupantMap.put(loc, obj);
     }
 
+    /**
+     * Remove the occupants in given location.
+     * 
+     * @return the original content in the location.
+     */
+    @Override
     public E remove(Location loc)
     {
         if (loc == null)
@@ -125,5 +180,3 @@ public class SparseBoundedGrid3<E> extends AbstractGrid<E>
         return occupantMap.remove(loc);
     }
 }
-
-
