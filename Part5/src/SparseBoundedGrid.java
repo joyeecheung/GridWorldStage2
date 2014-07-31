@@ -75,6 +75,11 @@ public class SparseBoundedGrid<E> extends AbstractGrid<E>
 
     public E get(Location loc)
     {
+        if (loc == null)
+        {
+            throw new NullPointerException("loc == null");
+        }
+
         if (!isValid(loc))
         {
             throw new IllegalArgumentException("Location " + loc
@@ -97,6 +102,11 @@ public class SparseBoundedGrid<E> extends AbstractGrid<E>
 
     public E put(Location loc, E obj)
     {
+        if (loc == null)
+        {
+            throw new NullPointerException("loc == null");
+        }
+
         if (!isValid(loc))
         {
             throw new IllegalArgumentException("Location " + loc
@@ -119,6 +129,11 @@ public class SparseBoundedGrid<E> extends AbstractGrid<E>
 
     public E remove(Location loc)
     {
+        if (loc == null)
+        {
+            throw new NullPointerException("loc == null");
+        }
+
         if (!isValid(loc))
         {
             throw new IllegalArgumentException("Location " + loc

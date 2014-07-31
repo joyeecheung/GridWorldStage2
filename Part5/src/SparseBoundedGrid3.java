@@ -1,29 +1,24 @@
-import info.gridworld.grid.Grid;
 import info.gridworld.grid.AbstractGrid;
+import info.gridworld.grid.Grid;
 import info.gridworld.grid.Location;
-import java.util.LinkedList;
 import java.util.ArrayList;
-import java.util.Iterator;
-
+import java.util.Map;
+import java.util.HashMap;
 /**
  * A SparseBoundedGrid is a rectangular grid with a finite
  * number of rows and columns and a sparse array implementation. 
- * This is the LinkedList version.
+ * This is the HashMap version.
  */
-public class SparseBoundedGrid2<E> extends AbstractGrid<E>
+public class SparseBoundedGrid3<E> extends AbstractGrid<E>
 {
-    // the array storing the occupants
-    private ArrayList<LinkedList<OccupantInCol>> occupantArray;
-    private int cols;
+    private Map<Location, E> occupantMap;
     private int rows;
+    private int cols;
 
     /**
-     * Constructs an empty bounded grid with the given dimensions.
-     * (Precondition: <code>rows > 0</code> and <code>cols > 0</code>.)
-     * @param rows number of rows in BoundedGrid
-     * @param cols number of columns in BoundedGrid
+     * Constructs an empty unbounded grid.
      */
-    public SparseBoundedGrid2(int rows, int cols)
+    public SparseBoundedGrid3(int rows, int cols)
     {
         if (rows <= 0)
         {
@@ -38,12 +33,7 @@ public class SparseBoundedGrid2<E> extends AbstractGrid<E>
         this.cols = cols;
         this.rows = rows;
 
-        // initialize the occupant array with LinkedLists
-        occupantArray = new ArrayList<LinkedList<OccupantInCol>>();
-        for(int i = 0; i < rows; i++)
-        {
-            occupantArray.add(new LinkedList<OccupantInCol>());
-        }
+        occupantMap = new HashMap<Location, E>();
     }
 
     public int getNumRows()
@@ -61,22 +51,13 @@ public class SparseBoundedGrid2<E> extends AbstractGrid<E>
         return 0 <= loc.getRow() && loc.getRow() < getNumRows()
             && 0 <= loc.getCol() && loc.getCol() < getNumCols();
     }
+
     public ArrayList<Location> getOccupiedLocations()
     {
         ArrayList<Location> theLocations = new ArrayList<Location>();
-
-        // Look at all grid locations.
-        for (int r = 0; r < getNumRows(); r++)
+        for (Location loc : occupantMap.keySet())
         {
-            LinkedList<OccupantInCol> row = occupantArray.get(r);
-            if (row != null)
-            {
-                for (OccupantInCol occ: row)
-                {
-                    Location loc = new Location(r, occ.getCol());
-                    theLocations.add(loc);
-                }
-            }
+            theLocations.add(loc);
         }
 
         return theLocations;
@@ -95,18 +76,7 @@ public class SparseBoundedGrid2<E> extends AbstractGrid<E>
                     + " is not valid");
         }
 
-        LinkedList<OccupantInCol> row = occupantArray.get(loc.getRow());
-        if (row != null)
-        {
-            for (OccupantInCol occ: row)
-            {
-                if (loc.getCol() == occ.getCol())
-                {
-                    return (E) occ.getOccupant();
-                }
-            }
-        }
-        return null;
+        return occupantMap.get(loc);
     }
 
     public E put(Location loc, E obj)
@@ -121,17 +91,14 @@ public class SparseBoundedGrid2<E> extends AbstractGrid<E>
             throw new IllegalArgumentException("Location " + loc
                     + " is not valid");
         }
- 
+
         if (obj == null)
         {
             throw new NullPointerException("obj == null");
         }
-
+        
         //Add the object to the grid.
-        E oldOccupant = remove(loc);
-        LinkedList<OccupantInCol> row = occupantArray.get(loc.getRow());
-        row.add(new OccupantInCol(obj,loc.getCol()));
-        return oldOccupant;
+        return occupantMap.put(loc, obj);
     }
 
     public E remove(Location loc)
@@ -155,20 +122,7 @@ public class SparseBoundedGrid2<E> extends AbstractGrid<E>
             return null;
         }
 
-       LinkedList<OccupantInCol> row = occupantArray.get(loc.getRow());
-
-        // assert: row != null
-       Iterator<OccupantInCol> it = row.iterator();
-       while(it.hasNext())
-       {
-           if(it.next().getCol() == loc.getCol())
-           {
-               it.remove();
-               break;
-           }
-       }
-
-        return obj;
+        return occupantMap.remove(loc);
     }
 }
 
