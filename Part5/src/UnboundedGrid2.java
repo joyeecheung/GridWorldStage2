@@ -19,7 +19,7 @@ public class UnboundedGrid2<E> extends AbstractGrid<E>
     public UnboundedGrid2()
     {
         size = 16;
-        occupantArray = new Object[size][size];;
+        occupantArray = new Object[size][size];
     }
 
     public int getNumRows()

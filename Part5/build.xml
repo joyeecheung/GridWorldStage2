@@ -1,4 +1,4 @@
-<project name="Part4" default="main" basedir=".">
+<project name="Part5" default="main" basedir=".">
     <property name="src.dir" value="src"/>
     <property name="build.dir" value="build"/>
     <property name="lib.dir" value="lib"/>
@@ -27,7 +27,9 @@
 
     <target name="compile">
         <mkdir dir="${classes.dir}"/>
-        <javac srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath" includeantruntime="true"/>
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath" includeantruntime="true">
+            <compilerarg value="-Xlint:unchecked"/>
+        </javac>
     </target>
 
      <target name="compile-test" depends="compile">
