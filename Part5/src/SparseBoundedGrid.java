@@ -77,7 +77,7 @@ public class SparseBoundedGrid<E> extends AbstractGrid<E>
     {
         if (loc == null)
         {
-            throw new NullPointerException("loc == null");
+            throw new IllegalArgumentException("loc == null");
         }
 
         if (!isValid(loc))
@@ -104,7 +104,7 @@ public class SparseBoundedGrid<E> extends AbstractGrid<E>
     {
         if (loc == null)
         {
-            throw new NullPointerException("loc == null");
+            throw new IllegalArgumentException("loc == null");
         }
 
         if (!isValid(loc))
@@ -115,7 +115,7 @@ public class SparseBoundedGrid<E> extends AbstractGrid<E>
      
         if (obj == null)
         {
-            throw new NullPointerException("obj == null");
+            throw new IllegalArgumentException("obj == null");
         }        
 
         // Add the object to the grid.
@@ -131,7 +131,7 @@ public class SparseBoundedGrid<E> extends AbstractGrid<E>
     {
         if (loc == null)
         {
-            throw new NullPointerException("loc == null");
+            throw new IllegalArgumentException("loc == null");
         }
 
         if (!isValid(loc))
