@@ -3,11 +3,14 @@ import info.gridworld.actor.Flower;
 import info.gridworld.actor.Rock;
 import info.gridworld.grid.Grid;
 import info.gridworld.grid.Location;
+
 import java.awt.Color;
 
 /**
  * A Jumper is an actor that will jump over Rocks and Flowers
  * and turn.
+ * 
+ * @author joyeecheung
  */
 public class Jumper extends Actor
 {
@@ -32,6 +35,7 @@ public class Jumper extends Actor
     /**
      * Jump if it can.
      */
+    @Override
     public void act()
     {
         if (canJump())
@@ -83,11 +87,11 @@ public class Jumper extends Actor
     }
 
     /**
-     * Tests whether this Jumper can move forward into a location two grids
-     * ahead
-     * that is empty or contain a Rock or a Flower.
-     * 
-     * @return true if this Jumper can move.
+     * Check if this Jumper can move forward into a location two grids
+     * ahead which is empty or contain a Rock or a Flower. The location
+     * immediately ahead must also be empty or contains Rock or Flower.
+     *
+     * @return true if it can move.
      */
     public boolean canJump()
     {
@@ -111,7 +115,7 @@ public class Jumper extends Actor
         Actor neighbor = grid.get(next);
         // if the next grid isn't empty or doesn't contains Flower or Rock
         if (!(neighbor == null || neighbor instanceof Flower
-                || neighbor instanceof Rock))
+        || neighbor instanceof Rock))
         {
             return false;
         }

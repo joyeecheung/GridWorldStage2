@@ -2,6 +2,8 @@ import info.gridworld.actor.Bug;
 
 /**
  * The bug that makes different turns before each move.
+ * 
+ * @author joyeecheung
  */
 public class DancingBug extends Bug
 {
@@ -11,7 +13,7 @@ public class DancingBug extends Bug
     private int[] turns;
 
     /**
-     * Constructs a dancing bug that makes different turns before each move
+     * Constructs a dancing bug that makes different turns before each move.
      * 
      * @param turns
      *            number of turns for each step.

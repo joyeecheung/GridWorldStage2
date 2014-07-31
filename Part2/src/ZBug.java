@@ -3,6 +3,8 @@ import info.gridworld.grid.Location;
 
 /**
  * The bug that moves in a "Z" pattern, starting in the top left corner.
+ * 
+ * @author joyeecheung
  */
 public class ZBug extends Bug
 {

@@ -2,6 +2,8 @@ import info.gridworld.actor.Bug;
 
 /**
  * The bug that drops flowers in a spiral pattern.
+ * 
+ * @author joyeecheung
  */
 public class SpiralBug extends Bug
 {
@@ -23,7 +25,7 @@ public class SpiralBug extends Bug
     }
 
     /**
-     * Moves to the next location of the square.
+     * Moves to the next location.
      */
     public void act()
     {

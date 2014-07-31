@@ -4,6 +4,8 @@ import info.gridworld.grid.Location;
 /**
  * This class runs a world that contains a zbug,
  * added at random locations.
+ * 
+ * @author joyeecheung
  */
 public class ZBugRunner
 {

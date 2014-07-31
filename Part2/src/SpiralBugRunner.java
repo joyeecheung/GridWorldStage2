@@ -6,6 +6,8 @@ import info.gridworld.grid.Location;
 /**
  * This class runs a world that contains a spiral bug,
  * added a given location.
+ * 
+ * @author joyeecheung
  */
 public class SpiralBugRunner
 {

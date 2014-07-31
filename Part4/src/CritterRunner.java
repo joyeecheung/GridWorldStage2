@@ -7,6 +7,8 @@ import java.awt.Color;
 
 /**
  * This class runs a world that contains BlusterCritters.
+ * 
+ * @author joyeecheung
  */
 public class CritterRunner
 {

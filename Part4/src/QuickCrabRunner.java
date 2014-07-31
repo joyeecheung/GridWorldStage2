@@ -5,6 +5,8 @@ import info.gridworld.actor.Rock;
 
 /**
  * This class runs a world that contains quick crabs
+ * 
+ * @author joyeecheung
  */
 public class QuickCrabRunner
 {

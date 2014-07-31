@@ -22,8 +22,9 @@ import info.gridworld.actor.Flower;
 import info.gridworld.actor.Rock;
 
 /**
- * This class runs a world that contains crab critters. <br />
- * This class is not tested on the AP CS A and AB exams.
+ * This class runs a world that contains crab critters.
+ * 
+ * T@author joyeecheung
  */
 public class CrabRunner
 {

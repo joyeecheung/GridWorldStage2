@@ -2,6 +2,8 @@ import info.gridworld.actor.Bug;
 
 /**
  * The bug moves with a octagonal path.
+ * 
+ * @author joyeecheung
  */
 public class CircleBug extends Bug
 {
@@ -12,7 +14,7 @@ public class CircleBug extends Bug
 
     /**
      * Constructs a circle bug that traces a octagon of a given side length
-     * 
+     *
      * @param length
      *            the side length
      */
@@ -23,8 +25,9 @@ public class CircleBug extends Bug
     }
 
     /**
-     * Moves to the next location of the square.
+     * Moves to the next location.
      */
+    @Override
     public void act()
     {
         if (steps < sideLength && canMove())

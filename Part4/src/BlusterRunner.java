@@ -3,6 +3,8 @@ import info.gridworld.actor.Critter;
 
 /**
  * This class runs a world that contains BlusterCritters.
+ * 
+ * @author joyeecheung
  */
 public class BlusterRunner
 {

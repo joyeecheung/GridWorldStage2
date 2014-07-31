@@ -5,6 +5,8 @@ import java.awt.Color;
 
 /**
  * This class runs a world that contains RockHounds.
+ * 
+ * @author joyeecheung
  */
 public class RockHoundRunner
 {
