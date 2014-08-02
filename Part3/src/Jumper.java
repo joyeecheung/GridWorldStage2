@@ -9,7 +9,7 @@ import java.awt.Color;
 /**
  * A Jumper is an actor that will jump over Rocks and Flowers
  * and turn.
- * 
+ *
  * @author joyeecheung
  */
 public class Jumper extends Actor
@@ -27,9 +27,9 @@ public class Jumper extends Actor
     /**
      * Constructs a Jumper with given color.
      */
-    public Jumper(Color c)
+    public Jumper(Color color)
     {
-        setColor(c);
+        setColor(color);
     }
 
     /**
@@ -112,18 +112,18 @@ public class Jumper extends Actor
             return false;
         }
 
-        Actor neighbor = grid.get(next);
-        // if the next grid isn't empty or doesn't contains Flower or Rock
-        if (!(neighbor == null || neighbor instanceof Flower
-        || neighbor instanceof Rock))
-        {
-            return false;
-        }
-
         Location dest = next.getAdjacentLocation(getDirection());
 
         // can't move if the destination is out of bounds
         if (!grid.isValid(dest))
+        {
+            return false;
+        }
+
+        Actor neighbor = grid.get(next);
+        // if the next grid isn't empty or doesn't contains Flower or Rock
+        if (!(neighbor == null || neighbor instanceof Flower
+        || neighbor instanceof Rock))
         {
             return false;
         }
