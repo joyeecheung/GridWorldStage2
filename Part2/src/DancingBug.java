@@ -2,7 +2,7 @@ import info.gridworld.actor.Bug;
 
 /**
  * The bug that makes different turns before each move.
- * 
+ *
  * @author joyeecheung
  */
 public class DancingBug extends Bug
@@ -14,7 +14,7 @@ public class DancingBug extends Bug
 
     /**
      * Constructs a dancing bug that makes different turns before each move.
-     * 
+     *
      * @param turns
      *            number of turns for each step.
      */
@@ -26,7 +26,7 @@ public class DancingBug extends Bug
 
     /**
      * Turns given number of times.
-     * 
+     *
      * @param times
      *            number of turns for this move.
      */
@@ -41,10 +41,12 @@ public class DancingBug extends Bug
     /**
      * Moves to the next location.
      */
+    @Override
     public void act()
     {
         if (canMove())
         {
+            // turn and set next step
             turn(turns[steps]);
             steps = (steps + 1) % turns.length;
             super.act();

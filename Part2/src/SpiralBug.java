@@ -29,7 +29,7 @@ public class SpiralBug extends Bug
      */
     public void act()
     {
-        if (steps < sideLength && canMove())
+        if (canMove() && steps < sideLength)
         {
             move();
             steps++;
@@ -38,9 +38,11 @@ public class SpiralBug extends Bug
         {
             turn();
             turn();
-            steps = 0;
             // increase the side length after turning to get sprial pattern.
             sideLength++;
+            // start over using the new side length
+            steps = 0;
+
         }
     }
 }
