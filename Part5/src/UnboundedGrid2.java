@@ -79,11 +79,11 @@ public class UnboundedGrid2<E> extends AbstractGrid<E>
         ArrayList<Location> theLocations = new ArrayList<Location>();
 
         // Look at all grid locations.
-        for (int r = 0; r < size; r++)
+        for (int i = 0; i < size; i++)
         {
-            for (int c = 0; c < size; c++)
+            for (int j = 0; j < size; j++)
             {
-                Location loc = new Location(r, c);
+                Location loc = new Location(i, j);
                 if (get(loc) != null)
                 {
                     theLocations.add(loc);
@@ -211,11 +211,11 @@ public class UnboundedGrid2<E> extends AbstractGrid<E>
         Object[][] temp = new Object[sizeNeeded][sizeNeeded];
 
         // copy the occupants over
-        for (int r = 0; r < size; r++)
+        for (int i = 0; i < size; i++)
         {
-            for (int c = 0; c < size; c++)
+            for (int j = 0; j < size; j++)
             {
-                temp[r][c] = occupantArray[r][c];
+                temp[i][j] = occupantArray[i][j];
             }
         }
 

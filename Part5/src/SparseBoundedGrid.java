@@ -93,14 +93,14 @@ public class SparseBoundedGrid<E> extends AbstractGrid<E>
         ArrayList<Location> theLocations = new ArrayList<Location>();
 
         // Look at all grid locations.
-        for (int r = 0; r < getNumRows(); r++)
+        for (int i = 0; i < getNumRows(); i++)
         {
-            SparseGridNode p = occupantArray[r];
-            while (p != null)
+            SparseGridNode node = occupantArray[i];
+            while (node != null)
             {
-                Location loc = new Location(r, p.getCol());
+                Location loc = new Location(i, node.getCol());
                 theLocations.add(loc);
-                p = p.getNext();
+                node = node.getNext();
             }
         }
 
@@ -127,16 +127,16 @@ public class SparseBoundedGrid<E> extends AbstractGrid<E>
                     + " is not valid");
         }
 
-        SparseGridNode p = occupantArray[loc.getRow()];
+        SparseGridNode node = occupantArray[loc.getRow()];
 
         // find the object in the linked list
-        while (p != null)
+        while (node != null)
         {
-            if (loc.getCol() == p.getCol())
+            if (loc.getCol() == node.getCol())
             {
-                return (E) p.getOccupant();
+                return (E) node.getOccupant();
             }
-            p = p.getNext();
+            node = node.getNext();
         }
 
         return null;
@@ -168,9 +168,9 @@ public class SparseBoundedGrid<E> extends AbstractGrid<E>
 
         // Add the object to the grid.
         E oldOccupant = remove(loc);
-        SparseGridNode p = occupantArray[loc.getRow()];
+        SparseGridNode node = occupantArray[loc.getRow()];
         occupantArray[loc.getRow()] = new SparseGridNode(obj,
-                loc.getCol(), p);
+                loc.getCol(), node);
 
         return oldOccupant;
     }
@@ -203,31 +203,31 @@ public class SparseBoundedGrid<E> extends AbstractGrid<E>
         }
 
         // Remove the object from the grid.
-        SparseGridNode p = occupantArray[loc.getRow()];
+        SparseGridNode node = occupantArray[loc.getRow()];
 
-        // assert: p != null
+        // assert: node != null
         // The head of the linked list is the object
-        if (p.getCol() == loc.getCol())
+        if (node.getCol() == loc.getCol())
         {
             // move the next one ahead
-            occupantArray[loc.getRow()] = p.getNext();
+            occupantArray[loc.getRow()] = node.getNext();
         }
         else
         {
-            // p marks the previous node of the node being checked
-            // q is the node being checked
-            SparseGridNode q = p.getNext();
-            while (q != null && q.getCol() != loc.getCol())
+            // node marks the previous node of the node being checked
+            // cur is the node being checked
+            SparseGridNode cur = node.getNext();
+            while (cur != null && cur.getCol() != loc.getCol())
             {
-                p = p.getNext();
-                q = q.getNext();
+                node = node.getNext();
+                cur = cur.getNext();
             }
 
             // remove the found occupant
-            if (q != null)
+            if (cur != null)
             {
                 // let the previous node point to the next node
-                p.setNext(q.getNext());
+                node.setNext(cur.getNext());
             }
         }
 
