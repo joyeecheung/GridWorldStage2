@@ -9,14 +9,14 @@ import java.util.ArrayList;
  * A KingCrab causes each actor that it processes
  * to move one location further away from the KingCrab.
  * If the actor cannot move away, the KingCrab removes it from the grid.
- * 
+ *
  * @author joyeecheung
  */
 public class KingCrab extends CrabCritter
 {
     /**
      * Check if two location is adjacent (in eight directions).
-     * 
+     *
      * @param loca
      *            first of the location
      * @param locb
@@ -25,8 +25,8 @@ public class KingCrab extends CrabCritter
     private boolean isAdjacent(Location loca, Location locb)
     {
         int x1 = loca.getRow();
-        int y1 = loca.getCol();
         int x2 = locb.getRow();
+        int y1 = loca.getCol();
         int y2 = locb.getCol();
         double dist = Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
         return ((int) Math.floor(dist + 0.5)) <= 1;
@@ -34,12 +34,13 @@ public class KingCrab extends CrabCritter
 
     /**
      * Move the actor away if it can.
-     * 
+     *
      * @param a
      *            the poor actor.
      */
     private boolean moveAway(Actor a)
     {
+        // Rock or Flower can't move
         if (a instanceof Rock || a instanceof Flower)
         {
             return false;
@@ -72,11 +73,11 @@ public class KingCrab extends CrabCritter
     @Override
     public void processActors(ArrayList<Actor> actors)
     {
-        for (Actor a : actors)
+        for (Actor neighbor : actors)
         {
-            if (!moveAway(a))
+            if (!moveAway(neighbor))
             {
-                a.removeSelfFromGrid();
+                neighbor.removeSelfFromGrid();
             }
         }
     }

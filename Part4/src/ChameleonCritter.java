@@ -31,25 +31,25 @@ public class ChameleonCritter extends Critter
     @Override
     public void processActors(ArrayList<Actor> actors)
     {
-        int n = actors.size();
+        int actorsSize = actors.size();
 
         // if there are no neighbors, the critter darkens.
-        if (n == 0)
+        if (actorsSize == 0)
         {
-            Color c = getColor();
-            int red = (int) (c.getRed() * (1 - DARKENING_FACTOR));
-            int green = (int) (c.getGreen() * (1 - DARKENING_FACTOR));
-            int blue = (int) (c.getBlue() * (1 - DARKENING_FACTOR));
+            Color color = getColor();
+            int red = (int) (color.getRed() * (1 - DARKENING_FACTOR));
+            int green = (int) (color.getGreen() * (1 - DARKENING_FACTOR));
+            int blue = (int) (color.getBlue() * (1 - DARKENING_FACTOR));
 
             setColor(new Color(red, green, blue));
             return;
         }
 
         // randomly select a neighbor and put on its color
-        int r = (int) (Math.random() * n);
+        int rand = (int) (Math.random() * actorsSize);
 
-        Actor other = actors.get(r);
-        setColor(other.getColor());
+        Actor neighbor = actors.get(rand);
+        setColor(neighbor.getColor());
     }
 
     /**

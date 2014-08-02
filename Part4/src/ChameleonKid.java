@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  * A ChameleonKid changes its color to the color of one of the actors
  * immediately in front or behind. If there is no
- * actor in either of these locations, then the ChameleonKid darkens.
+ * actor in either of these locations, then the ChameleonKid darken.
  * 
  * @author joyeecheung
  */
@@ -23,14 +23,15 @@ public class ChameleonKid extends ChameleonCritter
     {
         ArrayList<Actor> actors = new ArrayList<Actor>();
         int[] dirs = { Location.AHEAD, Location.HALF_CIRCLE };
+        ArrayList<Location> around = getLocationsInDirections(dirs);
 
         // get all actors in given directions
-        for (Location loc : getLocationsInDirections(dirs))
+        for (Location loc : around)
         {
-            Actor a = getGrid().get(loc);
-            if (a != null)
+            Actor check = getGrid().get(loc);
+            if (check != null)
             {
-                actors.add(a);
+                actors.add(check);
             }
         }
 

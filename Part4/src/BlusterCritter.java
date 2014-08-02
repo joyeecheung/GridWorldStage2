@@ -16,7 +16,7 @@ public class BlusterCritter extends Critter
 {
     // it will get brighter if there are fewer than c critters,
     // darker if there are c or more than c critters.
-    private final int c;
+    private final int critters;
     private static final Color DEFAULT_COLOR = Color.YELLOW;
 
     /**
@@ -25,9 +25,9 @@ public class BlusterCritter extends Critter
      * @param c
      *            the given number of critters.
      */
-    public BlusterCritter(int c)
+    public BlusterCritter(int critters)
     {
-        this.c = c;
+        this.critters = critters;
         setColor(DEFAULT_COLOR);
     }
 
@@ -63,10 +63,10 @@ public class BlusterCritter extends Critter
                 Location checkedLoc = new Location(i, j);
                 if (grid.isValid(checkedLoc))
                 {
-                    Actor a = grid.get(checkedLoc);
-                    if (a != null && a != this)
+                    Actor neighbor = grid.get(checkedLoc);
+                    if (neighbor != null && neighbor != this)
                     {
-                        actors.add(a);
+                        actors.add(neighbor);
                     }
                 }
             }
@@ -87,15 +87,15 @@ public class BlusterCritter extends Critter
     {
         // count how many actors are in the area within two steps
         int count = 0;
-        for (Actor a : actors)
+        for (Actor neighbor : actors)
         {
-            if (a instanceof Critter)
+            if (neighbor instanceof Critter)
             {
                 count++;
             }
         }
 
-        changeColor(count < this.c);
+        changeColor(count < this.critters);
     }
 
     /**
