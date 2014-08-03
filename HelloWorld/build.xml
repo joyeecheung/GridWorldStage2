@@ -1,4 +1,4 @@
-<project name="Calculator" default="main" basedir=".">
+<project name="HelloWorld" default="main" basedir=".">
     <property name="src.dir" value="src"/>
     <property name="build.dir" value="build"/>
     <property name="lib.dir" value="lib"/>
@@ -8,16 +8,16 @@
     <property name="jar.dir" value="${build.dir}/jar"/>
     <property name="report.dir" value="${build.dir}/report"/>
 
-    <property name="main-class" value="calculator.Calculator"/>
-
-    <path id="application" location="${jar.dir}/${ant.project.name}.jar"/>
+    <property name="main-class" value="HelloWorld"/>
 
     <path id="classpath">
         <fileset dir="${lib.dir}" includes="*.jar"/>
     </path>
 
+    <path id="application" location="${jar.dir}/${ant.project.name}.jar"/>
+
     <path id="test-classpath">
-        <path refid="classpath"/> 
+        <path refid="classpath"/>
         <path location="${classes.dir}"/>
     </path>
 
@@ -27,14 +27,14 @@
 
     <target name="compile">
         <mkdir dir="${classes.dir}"/>
-        <javac srcdir="${src.dir}" destdir="${classes.dir}" includeantruntime="true"/>
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath" includeantruntime="true"/>
     </target>
-
-     <target name="compile-test" depends="compile">
+    
+    <target name="compile-test" depends="compile">
         <javac srcdir="${test.dir}" destdir="${classes.dir}" classpathref="test-classpath" includeantruntime="true"/>
     </target>
 
-   <target name="jar" depends="compile">
+    <target name="jar" depends="compile">
         <mkdir dir="${jar.dir}"/>
         <jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}">
             <manifest>
@@ -46,6 +46,7 @@
     <target name="run" depends="jar">
         <java classname="${main-class}" fork="true">
             <classpath>
+                <path refid="classpath"/>
                 <path refid="application"/>
             </classpath>
         </java>
@@ -62,7 +63,7 @@
         </junit> 
     </target>
 
-    <target name="report">
+    <target name="junitreport">
         <junitreport todir="${report.dir}">
             <fileset dir="${report.dir}" includes="TEST-*.xml"/>
             <report todir="${report.dir}"/>
@@ -70,5 +71,5 @@
     </target>
 
     <target name="clean-build" depends="clean,jar"/>
-    <target name="main" depends="clean,jar"/>
+    <target name="main" depends="clean,run"/>
 </project>
