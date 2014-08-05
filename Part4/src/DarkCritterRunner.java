@@ -23,9 +23,6 @@ public class DarkCritterRunner
         world.add(new Flower());
         world.add(new Bug());
         world.add(new Bug());
-        world.add(new CrabCritter());
-        world.add(new CrabCritter());
-        world.add(new CrabCritter());
         world.add(new DarkCritter());
         world.show();
     }
