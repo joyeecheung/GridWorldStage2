@@ -9,6 +9,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  * The main class of the calculator.
+ * 
  * @author joyeecheung
  */
 public class Calculator
@@ -22,13 +23,16 @@ public class Calculator
 
 /**
  * The runnable implementation of calculator.
+ * 
  * @author joyeecheung
  */
 class CalculatorApp implements Runnable
 {
     private static final int DEFAULT_FONT_SIZE = 16;
 
-    /** (non-Javadoc)
+    /**
+     * (non-Javadoc)
+     * 
      * @see java.lang.Runnable#run()
      */
     @Override
@@ -53,7 +57,7 @@ class CalculatorApp implements Runnable
         UIManager.put("Button.font", defaultFont);
         UIManager.put("Label.font", defaultFont);
         UIManager.put("TextField.font", defaultFont);
-        
+
         // Construct a frame and set it up
         JFrame frame = new JFrame();
         frame.setTitle("Calculator");
