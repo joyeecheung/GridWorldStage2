@@ -14,7 +14,7 @@ import java.awt.Color;
  */
 public class Jumper extends Actor
 {
-    private static final Color DEFAULT_COLOR = Color.PINK;
+    private static final Color DEFAULT_COLOR = Color.YELLOW;
 
     /**
      * Constructs a yellow Jumper.
@@ -50,6 +50,7 @@ public class Jumper extends Actor
 
     /**
      * Turns the Jumper 45 degrees to the right without changing its location.
+     * This method is copied from the Bug class in sample code.
      */
     public void turn()
     {
@@ -64,7 +65,7 @@ public class Jumper extends Actor
     {
         Grid<Actor> grid = getGrid();
 
-        // already out of the grids
+        // not in any grid
         if (grid == null)
         {
             return;

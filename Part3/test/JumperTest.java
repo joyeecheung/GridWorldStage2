@@ -181,5 +181,24 @@ public class JumperTest {
                 jumper2.getLocation().getRow(), 2);
         assertEquals("jumper2 is not in the same column",
                 jumper2.getLocation().getCol(), 6);
-    }
+
+         // place a jumper3 with a jumper4 in immediate front
+        Jumper jumper3 = new Jumper();
+        Jumper jumper4 = new Jumper();
+        world.add(new Location(4, 1), jumper3);
+        world.add(new Location(3, 1), jumper4);
+
+        // test if it turns after act()
+        previousDir = jumper3.getDirection();
+        jumper3.act();
+        assertFalse("Jumper3 doesn't turn for the jumper4.",
+                jumper3.getDirection() == previousDir);
+        
+        // test if the jumper2 is still in the same location
+        assertNotNull("jumper4 is not in the grid", jumper4.getGrid());
+        assertEquals("jumper4 is not in the same row",
+                jumper4.getLocation().getRow(), 3);
+        assertEquals("jumper4 is not in the same column",
+                jumper4.getLocation().getCol(), 1);
+   }
 }

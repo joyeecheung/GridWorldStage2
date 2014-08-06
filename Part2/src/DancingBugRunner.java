@@ -11,7 +11,7 @@ public class DancingBugRunner
     public static void main(String[] args)
     {
         ActorWorld world = new ActorWorld();
-        int[] turns = { 1, 2, 1, 2 };
+        int[] turns = { 2, 3, 2, 3 };
         world.add(new DancingBug(turns));
         world.show();
     }
