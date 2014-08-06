@@ -71,12 +71,11 @@ public class Jumper extends Actor
             return;
         }
 
-        Location current = getLocation();
-        Location next = current.getAdjacentLocation(getDirection());
+        Location next = getLocation().getAdjacentLocation(getDirection());
         Location dest = next.getAdjacentLocation(getDirection());
 
-        // the destination is valid
-        if (grid.isValid(dest))
+        // the next location and the destination is valid
+        if (grid.isValid(next) && grid.isValid(dest))
         {
             moveTo(dest);
         }
@@ -98,25 +97,19 @@ public class Jumper extends Actor
     {
         Grid<Actor> grid = getGrid();
 
-        // already out of the grids
+        // not in any grid
         if (grid == null)
         {
             return false;
         }
 
-        Location current = getLocation();
-        Location next = current.getAdjacentLocation(getDirection());
+        int direction = getDirection();
+        Location next = getLocation().getAdjacentLocation(direction);
+        Location dest = next.getAdjacentLocation(direction);
 
-        // can't move if the next grid is out of bounds
-        if (!grid.isValid(next))
-        {
-            return false;
-        }
-
-        Location dest = next.getAdjacentLocation(getDirection());
-
-        // can't move if the destination is out of bounds
-        if (!grid.isValid(dest))
+        // can't move if the next location 
+        // or the destination is out of bounds
+        if (!grid.isValid(next) || !grid.isValid(dest))
         {
             return false;
         }
@@ -124,7 +117,7 @@ public class Jumper extends Actor
         Actor neighbor = grid.get(next);
         // if the next grid isn't empty or doesn't contains Flower or Rock
         if (!(neighbor == null || neighbor instanceof Flower
-        || neighbor instanceof Rock))
+            || neighbor instanceof Rock))
         {
             return false;
         }
