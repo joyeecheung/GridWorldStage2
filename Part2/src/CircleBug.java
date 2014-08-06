@@ -2,7 +2,7 @@ import info.gridworld.actor.Bug;
 
 /**
  * The bug moves with a octagonal path.
- * 
+ *
  * @author joyeecheung
  */
 public class CircleBug extends Bug

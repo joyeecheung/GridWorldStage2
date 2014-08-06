@@ -2,7 +2,7 @@ import info.gridworld.actor.Bug;
 
 /**
  * The bug that drops flowers in a spiral pattern.
- * 
+ *
  * @author joyeecheung
  */
 public class SpiralBug extends Bug
@@ -14,7 +14,7 @@ public class SpiralBug extends Bug
 
     /**
      * Constructs a spiral bug that drops flowers in a spiral pattern.
-     * 
+     *
      * @param length
      *            the side length
      */
@@ -27,6 +27,7 @@ public class SpiralBug extends Bug
     /**
      * Moves to the next location.
      */
+    @Override
     public void act()
     {
         if (canMove() && steps < sideLength)

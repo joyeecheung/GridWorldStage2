@@ -3,7 +3,7 @@ import info.gridworld.grid.Location;
 
 /**
  * The bug that moves in a "Z" pattern, starting in the top left corner.
- * 
+ *
  * @author joyeecheung
  */
 public class ZBug extends Bug
@@ -17,7 +17,7 @@ public class ZBug extends Bug
 
     /**
      * Constructs a z bug that moves in a "Z" pattern.
-     * 
+     *
      * @param length
      *            the side length
      */
@@ -32,6 +32,7 @@ public class ZBug extends Bug
     /**
      * Moves to the next location.
      */
+    @Override
     public void act()
     {
         // if the "Z" is not completed
