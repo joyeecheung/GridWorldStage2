@@ -49,7 +49,8 @@ public class DancingBug extends Bug
             // turn and set next step
             turn(turns[steps]);
             steps = (steps + 1) % turns.length;
-            super.act();
         }
+
+        super.act();
     }
 }
