@@ -22,12 +22,12 @@ public class SparseBoundedGridTest {
     @Test(expected=IllegalArgumentException.class)
     public void testIllegalArgsForConstructor() {
         // test illegal size
-        Grid grid = new SparseBoundedGrid(0, 0);
+        Grid grid = new SparseBoundedGrid<Actor>(0, 0);
     }
 
     @Test
     public void testIsValid() {
-        Grid<Actor> grid = new SparseBoundedGrid(10, 10);
+        Grid<Actor> grid = new SparseBoundedGrid<Actor>(10, 10);
 
         // test invalid locations
         assertFalse("Location (16, 16) valid in 10 x 10 grid", 
@@ -44,7 +44,7 @@ public class SparseBoundedGridTest {
 
     @Test
     public void testGetOccupiedLocations() {
-        Grid<Actor> grid = new SparseBoundedGrid(10, 10);        
+        Grid<Actor> grid = new SparseBoundedGrid<Actor>(10, 10);        
 
         // test if a new grid is empty
         assertTrue("A newly created grid is not empty",
@@ -71,19 +71,19 @@ public class SparseBoundedGridTest {
 
     @Test(expected=IllegalArgumentException.class)
     public void testNullLocForGet() {
-        Grid<Actor> grid = new SparseBoundedGrid(10, 10);        
+        Grid<Actor> grid = new SparseBoundedGrid<Actor>(10, 10);
         grid.get(null);
     }
 
     @Test(expected=IllegalArgumentException.class)
     public void testInvalidLocForGet() {
-        Grid<Actor> grid = new SparseBoundedGrid(10, 10);        
+        Grid<Actor> grid = new SparseBoundedGrid<Actor>(10, 10);
         grid.get(new Location(10, 10));
     }
 
     @Test
     public void testGet() {
-        Grid<Actor> grid = new SparseBoundedGrid(10, 10);        
+        Grid<Actor> grid = new SparseBoundedGrid<Actor>(10, 10);
         assertNull("Empty grid doesn't return null for get()",
                 grid.get(new Location(1, 1)));
 
@@ -106,13 +106,79 @@ public class SparseBoundedGridTest {
                 grid.get(loc3), bug); 
     }
 
-    @Test
-    public void testPut() {
-    
+    @Test(expected=IllegalArgumentException.class)
+    public void testNullLocForPut() {
+        Grid<Actor> grid = new SparseBoundedGrid<Actor>(10, 10); 
+        Actor a = new Actor();
+        grid.put(null, a);
+    }
+
+    @Test(expected=IllegalArgumentException.class)
+    public void testInvalidLocForPut() {
+        Grid<Actor> grid = new SparseBoundedGrid<Actor>(10, 10);
+        Actor a = new Actor();
+        grid.put(new Location(10, 10), a);
+    }
+
+    @Test(expected=IllegalArgumentException.class)
+    public void testNullOccupantForPut() {
+        Grid<Actor> grid = new SparseBoundedGrid<Actor>(10, 10);
+        grid.put(new Location(10, 10), null);
     }
 
     @Test
+    public void testPut() {
+        Grid<Actor> grid = new SparseBoundedGrid<Actor>(10, 10);
+
+        Location loc = new Location(1, 2);       
+        Actor a = new Actor();
+        Actor b = new Actor();
+
+        // put an actor into the grid, see if it can be got back 
+        grid.put(loc, a);
+        assertSame("Different occupant is returned",
+                grid.get(loc), a);
+
+        // put another actor into the same location, see if
+        // the old occupant is repleced and returned
+        Actor old = grid.put(loc, b);
+        assertSame("The old occupant is not returned correctly",
+                old, a);
+        assertNotSame("The old occupant is not replaced",
+                grid.get(loc), a);
+        assertSame("The old occupant is not replaced",
+                grid.get(loc), b);
+    }
+
+    @Test(expected=IllegalArgumentException.class)
+    public void testNullLocForRemove() {
+        Grid<Actor> grid = new SparseBoundedGrid<Actor>(10, 10); 
+        grid.remove(null);
+    }
+
+    @Test(expected=IllegalArgumentException.class)
+    public void testInvalidLocForRemove() {
+        Grid<Actor> grid = new SparseBoundedGrid<Actor>(10, 10);
+        grid.remove(new Location(10, 10));
+    }
+
+
+    @Test
     public void testRemove() {
-    
+        Grid<Actor> grid = new SparseBoundedGrid<Actor>(10, 10);
+
+        assertNull("Remove from empty location doesn't return null",
+                grid.remove(new Location(2, 2)));
+
+        Location loc = new Location(1, 2);       
+        Actor a = new Actor();
+
+        // see if the target is removed and returned properly
+        grid.put(loc, a);
+        Actor old = grid.remove(loc);
+        assertSame("remove() doesn't return the removed object"
+                + " correctly", old, a);
+        assertNull("The location where the object has been removed"
+                + " is not empty", grid.get(loc));
     }
 }
