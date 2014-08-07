@@ -69,7 +69,7 @@ public class JumperTest {
         jumper.act();
         assertFalse("Jumper doesn't turn for the rock.",
                 jumper.getDirection() == previousDir);
-        
+
         // test if the Rock is still in the same location
         assertNotNull("Rock is not in the grid", rock.getGrid());
         assertEquals("Rock is not in the same row",
@@ -91,14 +91,15 @@ public class JumperTest {
         
         // place a jumper one way away from the edge 
         Jumper jumper = new Jumper();
-        world.add(new Location(1, 1), jumper);
+        world.add(new Location(1, 7), jumper);
 
         // test if it turns after act()
         int previousDir = jumper.getDirection();
         jumper.act();
+
+        assertNotNull("Jumper is not in the grid", jumper.getGrid());
         assertFalse("Jumper doesn't turn for invalid destination.",
                 jumper.getDirection() == previousDir);
-        
     }
 
     /** 
@@ -118,7 +119,8 @@ public class JumperTest {
         // test if it turns after act()
         int previousDir = jumper.getDirection();
         jumper.act();
-        assertFalse("Jumper doesn't turn for invalid destination.",
+        assertNotNull("Jumper is not in the grid", jumper.getGrid());
+        assertFalse("Jumper doesn't turn for facing an edge",
                 jumper.getDirection() == previousDir);
     }
 
@@ -144,7 +146,7 @@ public class JumperTest {
         jumper.act();
         assertFalse("Jumper doesn't turn for the bug.",
                 jumper.getDirection() == previousDir);
-        
+
         // test if the bug is still in the same location
         assertNotNull("bug is not in the grid", bug.getGrid());
         assertEquals("bug is not in the same row",
@@ -174,7 +176,7 @@ public class JumperTest {
         jumper.act();
         assertFalse("Jumper doesn't turn for the jumper2.",
                 jumper.getDirection() == previousDir);
-        
+
         // test if the jumper2 is still in the same location
         assertNotNull("jumper2 is not in the grid", jumper2.getGrid());
         assertEquals("jumper2 is not in the same row",
@@ -191,10 +193,13 @@ public class JumperTest {
         // test if it turns after act()
         previousDir = jumper3.getDirection();
         jumper3.act();
-        assertFalse("Jumper3 doesn't turn for the jumper4.",
-                jumper3.getDirection() == previousDir);
-        
-        // test if the jumper2 is still in the same location
+
+        assertEquals("jumper3 can't jump over another jumper", 
+                jumper3.getLocation().getRow(), 2);
+        assertEquals("jumper3 can't jump over another jumper",
+                jumper3.getLocation().getCol(), 1);
+
+        // test if the jumper4 is still in the same location
         assertNotNull("jumper4 is not in the grid", jumper4.getGrid());
         assertEquals("jumper4 is not in the same row",
                 jumper4.getLocation().getRow(), 3);

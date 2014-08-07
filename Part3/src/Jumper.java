@@ -115,12 +115,6 @@ public class Jumper extends Actor
         }
 
         Actor neighbor = grid.get(next);
-        // if the next grid isn't empty or doesn't contains Flower or Rock
-        if (!(neighbor == null || neighbor instanceof Flower
-            || neighbor instanceof Rock))
-        {
-            return false;
-        }
 
         // can only land on a grid that is empty or contains Flower.
         neighbor = grid.get(dest);
