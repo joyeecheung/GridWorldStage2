@@ -3,6 +3,7 @@
     <property name="build.dir" value="build"/>
     <property name="lib.dir" value="lib"/>
     <property name="test.dir" value="test"/>
+    <property name="asset.dir" value="asset"/>
 
     <property name="classes.dir" value="${build.dir}/classes"/>
     <property name="jar.dir" value="${build.dir}/jar"/>
@@ -26,6 +27,9 @@
     </target>
 
     <target name="compile">
+        <copy todir="${classes.dir}">                                                                                                             
+            <fileset dir="${asset.dir}" includes="*.gif"/>
+        </copy>
         <mkdir dir="${classes.dir}"/>
         <javac srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath" includeantruntime="true"/>
     </target>

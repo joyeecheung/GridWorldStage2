@@ -1,6 +1,5 @@
 import info.gridworld.actor.Actor;
 import info.gridworld.actor.Flower;
-import info.gridworld.actor.Rock;
 import info.gridworld.grid.Grid;
 import info.gridworld.grid.Location;
 
@@ -107,7 +106,7 @@ public class Jumper extends Actor
         Location next = getLocation().getAdjacentLocation(direction);
         Location dest = next.getAdjacentLocation(direction);
 
-        // can't move if the next location 
+        // can't move if the next location
         // or the destination is out of bounds
         if (!grid.isValid(next) || !grid.isValid(dest))
         {
