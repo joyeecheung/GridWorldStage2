@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 /**
  * A <code>ChameleonCritter</code> takes on the color of neighboring actors as
- * it moves through the grid. <br />
+ * it moves through the grid, and darkens if there are no such neighbors.
  * 
  * @author joyeecheung
  */

@@ -38,7 +38,7 @@ public class KingCrab extends CrabCritter
      * @param a
      *            the poor actor.
      */
-    private boolean moveAway(Actor a)
+    private boolean canMoveAway(Actor a)
     {
         // Rock or Flower can't move
         if (a instanceof Rock || a instanceof Flower)
@@ -75,7 +75,7 @@ public class KingCrab extends CrabCritter
     {
         for (Actor neighbor : actors)
         {
-            if (!moveAway(neighbor))
+            if (!canMoveAway(neighbor))
             {
                 neighbor.removeSelfFromGrid();
             }
