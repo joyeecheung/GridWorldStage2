@@ -17,17 +17,17 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.lang.reflect.*;
 
-public class SparseBoundedGridTest {
+public class SparseBoundedGrid3Test {
 
     @Test(expected=IllegalArgumentException.class)
     public void testIllegalArgsForConstructor() {
         // test illegal size
-        Grid grid = new SparseBoundedGrid<Actor>(0, 0);
+        Grid grid = new SparseBoundedGrid3<Actor>(0, 0);
     }
 
     @Test
     public void testIsValid() {
-        Grid<Actor> grid = new SparseBoundedGrid<Actor>(10, 10);
+        Grid<Actor> grid = new SparseBoundedGrid3<Actor>(10, 10);
 
         // test invalid locations
         assertFalse("Location (16, 16) valid in 10 x 10 grid", 
@@ -44,7 +44,7 @@ public class SparseBoundedGridTest {
 
     @Test
     public void testGetOccupiedLocations() {
-        Grid<Actor> grid = new SparseBoundedGrid<Actor>(10, 10);        
+        Grid<Actor> grid = new SparseBoundedGrid3<Actor>(10, 10);        
 
         // test if a new grid is empty
         assertTrue("A newly created grid is not empty",
@@ -71,19 +71,19 @@ public class SparseBoundedGridTest {
 
     @Test(expected=IllegalArgumentException.class)
     public void testNullLocForGet() {
-        Grid<Actor> grid = new SparseBoundedGrid<Actor>(10, 10);
+        Grid<Actor> grid = new SparseBoundedGrid3<Actor>(10, 10);
         grid.get(null);
     }
 
     @Test(expected=IllegalArgumentException.class)
     public void testInvalidLocForGet() {
-        Grid<Actor> grid = new SparseBoundedGrid<Actor>(10, 10);
+        Grid<Actor> grid = new SparseBoundedGrid3<Actor>(10, 10);
         grid.get(new Location(10, 10));
     }
 
     @Test
     public void testGet() {
-        Grid<Actor> grid = new SparseBoundedGrid<Actor>(10, 10);
+        Grid<Actor> grid = new SparseBoundedGrid3<Actor>(10, 10);
         assertNull("Empty grid doesn't return null for get()",
                 grid.get(new Location(1, 1)));
 
@@ -108,27 +108,27 @@ public class SparseBoundedGridTest {
 
     @Test(expected=IllegalArgumentException.class)
     public void testNullLocForPut() {
-        Grid<Actor> grid = new SparseBoundedGrid<Actor>(10, 10); 
+        Grid<Actor> grid = new SparseBoundedGrid3<Actor>(10, 10); 
         Actor a = new Actor();
         grid.put(null, a);
     }
 
     @Test(expected=IllegalArgumentException.class)
     public void testInvalidLocForPut() {
-        Grid<Actor> grid = new SparseBoundedGrid<Actor>(10, 10);
+        Grid<Actor> grid = new SparseBoundedGrid3<Actor>(10, 10);
         Actor a = new Actor();
         grid.put(new Location(10, 10), a);
     }
 
     @Test(expected=IllegalArgumentException.class)
     public void testNullOccupantForPut() {
-        Grid<Actor> grid = new SparseBoundedGrid<Actor>(10, 10);
+        Grid<Actor> grid = new SparseBoundedGrid3<Actor>(10, 10);
         grid.put(new Location(0, 0), null);
     }
 
     @Test
     public void testPut() {
-        Grid<Actor> grid = new SparseBoundedGrid<Actor>(10, 10);
+        Grid<Actor> grid = new SparseBoundedGrid3<Actor>(10, 10);
 
         Location loc = new Location(1, 2);       
         Actor a = new Actor();
@@ -152,20 +152,20 @@ public class SparseBoundedGridTest {
 
     @Test(expected=IllegalArgumentException.class)
     public void testNullLocForRemove() {
-        Grid<Actor> grid = new SparseBoundedGrid<Actor>(10, 10); 
+        Grid<Actor> grid = new SparseBoundedGrid3<Actor>(10, 10); 
         grid.remove(null);
     }
 
     @Test(expected=IllegalArgumentException.class)
     public void testInvalidLocForRemove() {
-        Grid<Actor> grid = new SparseBoundedGrid<Actor>(10, 10);
+        Grid<Actor> grid = new SparseBoundedGrid3<Actor>(10, 10);
         grid.remove(new Location(10, 10));
     }
 
 
     @Test
     public void testRemove() {
-        Grid<Actor> grid = new SparseBoundedGrid<Actor>(10, 10);
+        Grid<Actor> grid = new SparseBoundedGrid3<Actor>(10, 10);
 
         assertNull("Remove from empty location doesn't return null",
                 grid.remove(new Location(2, 2)));
