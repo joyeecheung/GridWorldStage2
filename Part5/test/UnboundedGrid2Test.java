@@ -1,49 +1,51 @@
-import info.gridworld.actor.ActorWorld;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 import info.gridworld.actor.Actor;
 import info.gridworld.actor.Bug;
 import info.gridworld.actor.Flower;
 import info.gridworld.actor.Rock;
-import info.gridworld.grid.Location;
 import info.gridworld.grid.Grid;
+import info.gridworld.grid.Location;
 
-import org.junit.After;
-import org.junit.Before;
+import java.util.ArrayList;
+
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
-import java.util.Collection;
-import java.util.Arrays;
-import java.util.ArrayList;
-import java.lang.reflect.*;
-
-public class UnboundedGrid2Test {
+public class UnboundedGrid2Test
+{
 
     @Test
-    public void testNumRowsAndCols() {
+    public void testNumRowsAndCols()
+    {
         Grid grid = new UnboundedGrid2<Actor>();
         assertEquals(grid.getNumCols(), -1);
         assertEquals(grid.getNumRows(), -1);
     }
 
     @Test
-    public void testIsValid() {
+    public void testIsValid()
+    {
         Grid<Actor> grid = new UnboundedGrid2<Actor>();
 
         // test valid locations
-        assertFalse("Location (-1, -1) valid in unbounded grid 2", 
+        assertFalse("Location (-1, -1) valid in unbounded grid 2",
                 grid.isValid(new Location(-1, -1)));
 
         // test valid locations
-        assertTrue("Location (100, 100) invalid in unbounded grid", 
+        assertTrue("Location (100, 100) invalid in unbounded grid",
                 grid.isValid(new Location(100, 100)));
-        assertTrue("Location (0, 0) invalid in 10 x 10 grid", 
+        assertTrue("Location (0, 0) invalid in 10 x 10 grid",
                 grid.isValid(new Location(0, 0)));
     }
 
     @Test
-    public void testGetOccupiedLocations() {
-        Grid<Actor> grid = new UnboundedGrid2<Actor>();        
+    public void testGetOccupiedLocations()
+    {
+        Grid<Actor> grid = new UnboundedGrid2<Actor>();
 
         // test if a new grid is empty
         assertTrue("A newly created grid is not empty",
@@ -68,20 +70,23 @@ public class UnboundedGrid2Test {
                 result.contains(loc3));
     }
 
-    @Test(expected=IllegalArgumentException.class)
-    public void testNullLocForGet() {
+    @Test(expected = IllegalArgumentException.class)
+    public void testNullLocForGet()
+    {
         Grid<Actor> grid = new UnboundedGrid2<Actor>();
         grid.get(null);
     }
 
-    @Test(expected=IllegalArgumentException.class)
-    public void testInvalidLocForGet() {
+    @Test(expected = IllegalArgumentException.class)
+    public void testInvalidLocForGet()
+    {
         Grid<Actor> grid = new UnboundedGrid2<Actor>();
         grid.get(new Location(-1, -1));
     }
 
     @Test
-    public void testGet() {
+    public void testGet()
+    {
         Grid<Actor> grid = new UnboundedGrid2<Actor>();
         assertNull("Empty grid doesn't return null for get()",
                 grid.get(new Location(1, 1)));
@@ -100,42 +105,46 @@ public class UnboundedGrid2Test {
         grid.put(loc3, bug);
 
         assertSame("Wrong occupant is returned",
-                grid.get(loc1), flower); 
+                grid.get(loc1), flower);
         assertSame("Wrong occupant is returned",
-                grid.get(loc2), rock); 
+                grid.get(loc2), rock);
         assertSame("Wrong occupant is returned",
-                grid.get(loc3), bug); 
+                grid.get(loc3), bug);
     }
 
-    @Test(expected=IllegalArgumentException.class)
-    public void testNullLocForPut() {
-        Grid<Actor> grid = new UnboundedGrid2<Actor>(); 
+    @Test(expected = IllegalArgumentException.class)
+    public void testNullLocForPut()
+    {
+        Grid<Actor> grid = new UnboundedGrid2<Actor>();
         Actor a = new Actor();
         grid.put(null, a);
     }
 
-    @Test(expected=IllegalArgumentException.class)
-    public void testInvalidLocForPut() {
+    @Test(expected = IllegalArgumentException.class)
+    public void testInvalidLocForPut()
+    {
         Grid<Actor> grid = new UnboundedGrid2<Actor>();
         Actor a = new Actor();
         grid.put(new Location(-1, 10), a);
     }
 
-    @Test(expected=IllegalArgumentException.class)
-    public void testNullOccupantForPut() {
+    @Test(expected = IllegalArgumentException.class)
+    public void testNullOccupantForPut()
+    {
         Grid<Actor> grid = new UnboundedGrid2<Actor>();
         grid.put(new Location(10, 10), null);
     }
 
     @Test
-    public void testPut() {
+    public void testPut()
+    {
         Grid<Actor> grid = new UnboundedGrid2<Actor>();
 
         Location loc = new Location(133, 223);
         Actor a = new Actor();
         Actor b = new Actor();
 
-        // put an actor into the grid, see if it can be got back 
+        // put an actor into the grid, see if it can be got back
         grid.put(loc, a);
         assertSame("Different occupant is returned",
                 grid.get(loc), a);
@@ -151,20 +160,23 @@ public class UnboundedGrid2Test {
                 grid.get(loc), b);
     }
 
-    @Test(expected=IllegalArgumentException.class)
-    public void testNullLocForRemove() {
-        Grid<Actor> grid = new UnboundedGrid2<Actor>(); 
+    @Test(expected = IllegalArgumentException.class)
+    public void testNullLocForRemove()
+    {
+        Grid<Actor> grid = new UnboundedGrid2<Actor>();
         grid.remove(null);
     }
 
-    @Test(expected=IllegalArgumentException.class)
-    public void testInvalidLocForRemove() {
+    @Test(expected = IllegalArgumentException.class)
+    public void testInvalidLocForRemove()
+    {
         Grid<Actor> grid = new UnboundedGrid2<Actor>();
         grid.remove(new Location(-2, 10));
     }
 
     @Test
-    public void testRemove() {
+    public void testRemove()
+    {
         Grid<Actor> grid = new UnboundedGrid2<Actor>();
 
         assertNull("Remove from empty location doesn't return null",
