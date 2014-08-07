@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * A SparseBoundedGrid is a rectangular grid with a finite
  * number of rows and columns and a sparse array implementation.
  * This is the hand written linked list version.
- * 
+ *
  * @author joyeecheung
  *
  * @param <E>
@@ -24,7 +24,7 @@ public class SparseBoundedGrid<E> extends AbstractGrid<E>
     /**
      * Constructs an empty sparse bounded grid with the given dimensions.
      * (Precondition: <code>rows > 0</code> and <code>cols > 0</code>.)
-     * 
+     *
      * @param rows
      *            number of rows in BoundedGrid
      * @param cols
@@ -49,7 +49,7 @@ public class SparseBoundedGrid<E> extends AbstractGrid<E>
 
     /**
      * Get number of rows.
-     * 
+     *
      * @return number of rows.
      */
     @Override
@@ -60,7 +60,7 @@ public class SparseBoundedGrid<E> extends AbstractGrid<E>
 
     /**
      * Get number of columns.
-     * 
+     *
      * @return number of columns.
      */
     @Override
@@ -71,7 +71,7 @@ public class SparseBoundedGrid<E> extends AbstractGrid<E>
 
     /**
      * Check if the given location is valid in this grid.
-     * 
+     *
      * @return true if the given location is valid in this grid.
      */
     @Override
@@ -83,7 +83,7 @@ public class SparseBoundedGrid<E> extends AbstractGrid<E>
 
     /**
      * Get occupied locations in this grid.
-     * 
+     *
      * @return an ArrayList of Location containing occupied
      *         locations in this grid.
      */
@@ -109,7 +109,7 @@ public class SparseBoundedGrid<E> extends AbstractGrid<E>
 
     /**
      * Get the content in given location.
-     * 
+     *
      * @return the content in given location.
      */
     @SuppressWarnings("unchecked")
@@ -144,7 +144,7 @@ public class SparseBoundedGrid<E> extends AbstractGrid<E>
 
     /**
      * Put the given object in given location.
-     * 
+     *
      * @return the original content in the location.
      */
     @Override
@@ -168,16 +168,17 @@ public class SparseBoundedGrid<E> extends AbstractGrid<E>
 
         // Add the object to the grid.
         E oldOccupant = remove(loc);
-        SparseGridNode node = occupantArray[loc.getRow()];
-        occupantArray[loc.getRow()] = new SparseGridNode(obj,
-                loc.getCol(), node);
+        int row = loc.getRow();
+        int col = loc.getCol();
+        SparseGridNode node = occupantArray[row];
+        occupantArray[row] = new SparseGridNode(obj, col, node);
 
         return oldOccupant;
     }
 
     /**
      * Remove the occupants in given location.
-     * 
+     *
      * @return the original content in the location.
      */
     @Override
@@ -203,23 +204,25 @@ public class SparseBoundedGrid<E> extends AbstractGrid<E>
         }
 
         // Remove the object from the grid.
-        SparseGridNode node = occupantArray[loc.getRow()];
+        int targetRow = loc.getRow();
+        int targetCol = loc.getCol();
+        SparseGridNode target = occupantArray[targetRow];
 
-        // assert: node != null
+        // assert: target != null
         // The head of the linked list is the object
-        if (node.getCol() == loc.getCol())
+        if (target.getCol() == targetCol)
         {
             // move the next one ahead
-            occupantArray[loc.getRow()] = node.getNext();
+            occupantArray[targetRow] = target.getNext();
         }
         else
         {
-            // node marks the previous node of the node being checked
+            // target marks the previous node of the node being checked
             // cur is the node being checked
-            SparseGridNode cur = node.getNext();
-            while (cur != null && cur.getCol() != loc.getCol())
+            SparseGridNode cur = target.getNext();
+            while (cur != null && cur.getCol() != targetCol)
             {
-                node = node.getNext();
+                target = target.getNext();
                 cur = cur.getNext();
             }
 
@@ -227,7 +230,7 @@ public class SparseBoundedGrid<E> extends AbstractGrid<E>
             if (cur != null)
             {
                 // let the previous node point to the next node
-                node.setNext(cur.getNext());
+                target.setNext(cur.getNext());
             }
         }
 

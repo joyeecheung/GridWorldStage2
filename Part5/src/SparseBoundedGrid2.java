@@ -107,8 +107,7 @@ public class SparseBoundedGrid2<E> extends AbstractGrid<E>
             {
                 for (OccupantInCol occ : row)
                 {
-                    Location loc = new Location(r, occ.getCol());
-                    theLocations.add(loc);
+                    theLocations.add(new Location(r, occ.getCol()));
                 }
             }
         }
@@ -136,12 +135,14 @@ public class SparseBoundedGrid2<E> extends AbstractGrid<E>
                     + " is not valid");
         }
 
+        int targetCol = loc.getCol();
+
         LinkedList<OccupantInCol> row = occupantArray.get(loc.getRow());
         if (row != null)
         {
             for (OccupantInCol occ : row)
             {
-                if (loc.getCol() == occ.getCol())
+                if (occ.getCol() == targetCol)
                 {
                     return (E) occ.getOccupant();
                 }
@@ -176,8 +177,10 @@ public class SparseBoundedGrid2<E> extends AbstractGrid<E>
 
         //Add the object to the grid.
         E oldOccupant = remove(loc);
-        LinkedList<OccupantInCol> row = occupantArray.get(loc.getRow());
-        row.add(new OccupantInCol(obj, loc.getCol()));
+        int targetRow = loc.getRow();
+        int targetCol = loc.getCol();
+        LinkedList<OccupantInCol> row = occupantArray.get(targetRow);
+        row.add(new OccupantInCol(obj, targetCol));
         return oldOccupant;
     }
 
@@ -210,11 +213,13 @@ public class SparseBoundedGrid2<E> extends AbstractGrid<E>
 
         LinkedList<OccupantInCol> row = occupantArray.get(loc.getRow());
 
+        int targetCol = loc.getCol();
+
         // assert: row != null
         Iterator<OccupantInCol> it = row.iterator();
         while (it.hasNext())
         {
-            if (it.next().getCol() == loc.getCol())
+            if (it.next().getCol() == targetCol)
             {
                 it.remove();
                 break;

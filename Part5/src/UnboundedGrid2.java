@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * An <code>UnboundedGrid</code> is a rectangular grid with an
  * unbounded number of rows and columns. <br />
  * This is the resizable version.
- * 
+ *
  * @author joyeecheung
  *
  * @param <E>
@@ -33,7 +33,7 @@ public class UnboundedGrid2<E> extends AbstractGrid<E>
 
     /**
      * Get number of rows.
-     * 
+     *
      * @return number of rows.
      */
     @Override
@@ -44,7 +44,7 @@ public class UnboundedGrid2<E> extends AbstractGrid<E>
 
     /**
      * Get number of columns.
-     * 
+     *
      * @return number of columns.
      */
     @Override
@@ -55,7 +55,7 @@ public class UnboundedGrid2<E> extends AbstractGrid<E>
 
     /**
      * Check if the given location is valid in this grid.
-     * 
+     *
      * @return true if the given location is valid in this grid.
      */
     @Override
@@ -69,7 +69,7 @@ public class UnboundedGrid2<E> extends AbstractGrid<E>
 
     /**
      * Get occupied locations in this grid.
-     * 
+     *
      * @return an ArrayList of Location containing occupied
      *         locations in this grid.
      */
@@ -95,7 +95,7 @@ public class UnboundedGrid2<E> extends AbstractGrid<E>
 
     /**
      * Get the content in given location.
-     * 
+     *
      * @return the content in given location.
      */
     @SuppressWarnings("unchecked")
@@ -113,13 +113,16 @@ public class UnboundedGrid2<E> extends AbstractGrid<E>
                     + " is not valid");
         }
 
+        int targetRow = loc.getRow();
+        int targetCol = loc.getCol();
+
         // The location is out of the grid
-        if (loc.getRow() >= size || loc.getCol() >= size)
+        if (targetRow >= size || targetCol >= size)
         {
             return null;
         }
 
-        Object obj = occupantArray[loc.getRow()][loc.getCol()];
+        Object obj = occupantArray[targetRow][targetCol];
         if (obj == null)
         {
             return null;
@@ -132,7 +135,7 @@ public class UnboundedGrid2<E> extends AbstractGrid<E>
 
     /**
      * Put the given object in given location.
-     * 
+     *
      * @return the original content in the location.
      */
     @Override
@@ -154,21 +157,24 @@ public class UnboundedGrid2<E> extends AbstractGrid<E>
             throw new IllegalArgumentException("obj == null");
         }
 
+        int targetRow = loc.getRow();
+        int targetCol = loc.getCol();
+
         // if the Location is out of the grid, resize the grid
-        if (loc.getRow() >= size || loc.getCol() >= size)
+        if (targetRow >= size || targetCol >= size)
         {
             resize(loc);
         }
 
         // Add the object to the grid.
         E oldOccupant = get(loc);
-        occupantArray[loc.getRow()][loc.getCol()] = obj;
+        occupantArray[targetRow][targetCol] = obj;
         return oldOccupant;
     }
 
     /**
      * Remove the occupants in given location.
-     * 
+     *
      * @return the original content in the location.
      */
     @Override
