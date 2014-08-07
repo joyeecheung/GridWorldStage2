@@ -113,10 +113,8 @@ public class Jumper extends Actor
             return false;
         }
 
-        Actor neighbor = grid.get(next);
-
         // can only land on a grid that is empty or contains Flower.
-        neighbor = grid.get(dest);
+        Actor neighbor = grid.get(dest);
         return (neighbor == null || neighbor instanceof Flower);
     }
 }
