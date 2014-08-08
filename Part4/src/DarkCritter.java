@@ -5,7 +5,8 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 /**
- * A DarkCritter will turn every actor around black.
+ * A DarkCritter will turn every actor around black,
+ * but it can not step on any other actors including flowers
  *
  * @author joyeecheung
  */

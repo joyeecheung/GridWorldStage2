@@ -50,4 +50,35 @@ public class DarkCritterTest {
         assertEquals("Bug is not turned black", bug.getColor(), dc.getColor()); 
         assertEquals("Critter is not turned black", critter.getColor(), dc.getColor()); 
     }
+
+    @Test
+    public void testIfCanBeBlockedByFlowers() {
+        // set up the world
+        ActorWorld world = new ActorWorld();
+
+        // place a DarckCritter in the world
+        DarkCritter dc = new DarkCritter();
+        Location oldLoc = new Location(4, 4);
+        world.add(oldLoc, dc);
+
+        world.add(new Location(3, 3), new Flower());
+        world.add(new Location(3, 4), new Flower());
+        world.add(new Location(3, 5), new Flower());
+        Flower togo = new Flower();
+        world.add(new Location(4, 3), togo);
+        world.add(new Location(4, 5), new Flower());
+        world.add(new Location(5, 3), new Flower());
+        world.add(new Location(5, 4), new Flower());
+        world.add(new Location(5, 5), new Flower());
+
+        dc.act();
+        assertEquals("DarkCritter cannot be blocked by flowers",
+                dc.getLocation(), oldLoc);
+
+        togo.removeSelfFromGrid();
+        dc.act();
+
+        assertFalse("DarkCritter cannot move to the right location",
+                dc.getLocation().equals(oldLoc));
+    }
 }
