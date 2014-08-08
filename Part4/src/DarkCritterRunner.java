@@ -5,7 +5,7 @@ import info.gridworld.actor.Rock;
 
 /**
  * This class runs a world that contains crab critters.
- * 
+ *
  * @author joyeecheung
  */
 public class DarkCritterRunner

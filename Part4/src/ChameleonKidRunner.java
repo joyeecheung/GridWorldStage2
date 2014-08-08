@@ -5,7 +5,7 @@ import java.awt.Color;
 
 /**
  * This class runs a world that contains chameleon critters.
- * 
+ *
  * @author joyeecheung
  */
 public class ChameleonKidRunner

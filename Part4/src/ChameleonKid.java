@@ -8,14 +8,14 @@ import java.util.ArrayList;
  * A ChameleonKid changes its color to the color of one of the actors
  * immediately in front or behind. If there is no
  * actor in either of these locations, then the ChameleonKid darken.
- * 
+ *
  * @author joyeecheung
  */
 public class ChameleonKid extends ChameleonCritter
 {
     /**
      * Gets the actors immediately in front or behind.
-     * 
+     *
      * @return a list of actors occupying these locations
      */
     @Override
@@ -42,7 +42,7 @@ public class ChameleonKid extends ChameleonCritter
      * This method is copied from the sample code of CrabCritter.
      * Finds the valid adjacent locations of this critter in different
      * directions.
-     * 
+     *
      * @param directions
      *            an array of directions (which are relative to the
      *            current direction)

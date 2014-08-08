@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * A QuickCrab moves to one of the two locations,
  * randomly selected, that are two spaces to its right or left,
  * if that location and the intervening location are both empty.
- * 
+ *
  * @author joyeecheung
  */
 public class QuickCrab extends CrabCritter
@@ -34,7 +34,7 @@ public class QuickCrab extends CrabCritter
     /**
      * Finds the valid locations of this critter two spaces in different
      * directions.
-     * 
+     *
      * @param directions
      *            - an array of directions (which are relative to the
      *            current direction)

@@ -1,23 +1,23 @@
 import info.gridworld.actor.ActorWorld;
-import info.gridworld.actor.Flower;
 import info.gridworld.actor.Bug;
+import info.gridworld.actor.Flower;
 import info.gridworld.actor.Rock;
-import info.gridworld.grid.UnboundedGrid;
 import info.gridworld.grid.Location;
+import info.gridworld.grid.UnboundedGrid;
 
 /**
  * This class runs a world that contains a circle bug,
  * added at random locations.
- * 
+ *
  * @author joyeecheung
  */
-public class TestRunner 
+public class TestRunner
 {
     public static void main(String[] args)
     {
         ActorWorld world = new ActorWorld();
         world.setGrid(new UnboundedGrid());
-        
+
         world.add(new Location(1, 1), new ChameleonCritter());
         world.add(new Location(1, 15), new ChameleonKid());
         world.add(new Location(15, 1), new BlusterCritter(1));

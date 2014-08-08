@@ -5,7 +5,7 @@ import info.gridworld.actor.Rock;
 
 /**
  * This class runs a world that contains king crabs.
- * 
+ *
  * @author joyeecheung
  */
 public class KingCrabRunner

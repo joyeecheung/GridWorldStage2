@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  * A RockHound gets the actors to be processed in the
  * same way as a Critter. It removes any rocks in that list from the grid.
- * 
+ *
  * @author joyeecheung
  */
 public class RockHound extends Critter

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 /**
  * A BlusterCritter gets brighter if there are fewer than c critters,
  * darker if there are c or more than c critters.
- * 
+ *
  * @author joyeecheung
  */
 public class BlusterCritter extends Critter
@@ -21,7 +21,7 @@ public class BlusterCritter extends Critter
 
     /**
      * Constructs a BlusterCritter with c as color changing factor.
-     * 
+     *
      * @param c
      *            the given number of critters.
      */
@@ -34,7 +34,7 @@ public class BlusterCritter extends Critter
     /**
      * Gets the actors for processing. Looks at all of the neighbors
      * within two steps of its current location.
-     * 
+     *
      * @return a list of actors that are neighbors of this critter
      */
     @Override
@@ -78,7 +78,7 @@ public class BlusterCritter extends Critter
     /**
      * A BlusterCritter gets brighter if there are fewer than c critters,
      * darker if there are c or more than c critters
-     * 
+     *
      * @param actors
      *            the actors to be processed
      */
@@ -95,12 +95,12 @@ public class BlusterCritter extends Critter
             }
         }
 
-        changeColor(count < this.critters);
+        changeColor(count < critters);
     }
 
     /**
      * Change the color of the BlusterCritter to brighter or darker.
-     * 
+     *
      * @param brighter
      *            if the BlusterCritter should be brighter.
      */
@@ -119,7 +119,7 @@ public class BlusterCritter extends Critter
 
     /**
      * Filter a channel and control the value between 0 ~ 255
-     * 
+     *
      * @param channel
      *            value of the channel
      * @param delta

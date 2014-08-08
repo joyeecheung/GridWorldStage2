@@ -9,7 +9,7 @@ import java.util.ArrayList;
 /**
  * A <code>CrabCritter</code> looks at a limited set of neighbors when it eats
  * and moves.
- * 
+ *
  * @author joyeecheung
  */
 public class CrabCritter extends Critter
@@ -27,7 +27,7 @@ public class CrabCritter extends Critter
     /**
      * A crab gets the actors in the three locations immediately in front, to
      * its front-right and to its front-left
-     * 
+     *
      * @return a list of actors occupying these locations
      */
     @Override
@@ -35,7 +35,7 @@ public class CrabCritter extends Critter
     {
         ArrayList<Actor> actors = new ArrayList<Actor>();
         int[] dirs =
-        { Location.AHEAD, Location.HALF_LEFT, Location.HALF_RIGHT };
+            { Location.AHEAD, Location.HALF_LEFT, Location.HALF_RIGHT };
 
         // get neighbors in given directions.
         for (Location loc : getLocationsInDirections(dirs))
@@ -58,7 +58,7 @@ public class CrabCritter extends Critter
     {
         ArrayList<Location> locs = new ArrayList<Location>();
         int[] dirs =
-        { Location.LEFT, Location.RIGHT };
+            { Location.LEFT, Location.RIGHT };
 
         // get available neighboring locations within given directions
         for (Location loc : getLocationsInDirections(dirs))
@@ -100,7 +100,7 @@ public class CrabCritter extends Critter
     /**
      * Finds the valid adjacent locations of this critter in different
      * directions.
-     * 
+     *
      * @param directions
      *            an array of directions (which are relative to the
      *            current direction)
