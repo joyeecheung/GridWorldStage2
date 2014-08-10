@@ -54,6 +54,21 @@ public class UnboundedGrid2<E> extends AbstractGrid<E>
     }
 
     /**
+     * Get the actual size of the grid.
+     *
+     * @return the actual size of the grid.
+     */
+    protected int getSize()
+    {
+        return size;
+    }
+
+    protected void setSize(int size)
+    {
+        this.size = size;
+    }
+
+    /**
      * Check if the given location is valid in this grid.
      *
      * @return true if the given location is valid in this grid.
@@ -77,6 +92,7 @@ public class UnboundedGrid2<E> extends AbstractGrid<E>
     public ArrayList<Location> getOccupiedLocations()
     {
         ArrayList<Location> theLocations = new ArrayList<Location>();
+        int size = getSize();
 
         // Look at all grid locations.
         for (int i = 0; i < size; i++)
@@ -102,19 +118,11 @@ public class UnboundedGrid2<E> extends AbstractGrid<E>
     @Override
     public E get(Location loc)
     {
-        if (loc == null)
-        {
-            throw new IllegalArgumentException("loc == null");
-        }
-
-        if (!isValid(loc))
-        {
-            throw new IllegalArgumentException("Location " + loc
-                    + " is not valid");
-        }
+        checkLocation(loc);
 
         int targetRow = loc.getRow();
         int targetCol = loc.getCol();
+        int size = getSize();
 
         // The location is out of the grid
         if (targetRow >= size || targetCol >= size)
@@ -141,16 +149,7 @@ public class UnboundedGrid2<E> extends AbstractGrid<E>
     @Override
     public E put(Location loc, E obj)
     {
-        if (loc == null)
-        {
-            throw new IllegalArgumentException("loc == null");
-        }
-
-        if (!isValid(loc))
-        {
-            throw new IllegalArgumentException("Location " + loc
-                    + " is not valid");
-        }
+        checkLocation(loc);
 
         if (obj == null)
         {
@@ -159,6 +158,7 @@ public class UnboundedGrid2<E> extends AbstractGrid<E>
 
         int targetRow = loc.getRow();
         int targetCol = loc.getCol();
+        int size = getSize();
 
         // if the Location is out of the grid, resize the grid
         if (targetRow >= size || targetCol >= size)
@@ -180,16 +180,7 @@ public class UnboundedGrid2<E> extends AbstractGrid<E>
     @Override
     public E remove(Location loc)
     {
-        if (loc == null)
-        {
-            throw new IllegalArgumentException("loc == null");
-        }
-
-        if (!isValid(loc))
-        {
-            throw new IllegalArgumentException("Location " + loc
-                    + " is not valid");
-        }
+        checkLocation(loc);
 
         E obj = get(loc);
 
@@ -207,8 +198,9 @@ public class UnboundedGrid2<E> extends AbstractGrid<E>
 
     private void resize(Location loc)
     {
+        int oldSize = getSize();
         // double both array bounds until they are large enough
-        int sizeNeeded = size;
+        int sizeNeeded = oldSize;
         while (loc.getRow() >= sizeNeeded || loc.getCol() >= sizeNeeded)
         {
             sizeNeeded *= 2;
@@ -217,9 +209,9 @@ public class UnboundedGrid2<E> extends AbstractGrid<E>
         Object[][] temp = new Object[sizeNeeded][sizeNeeded];
 
         // copy the occupants over
-        for (int i = 0; i < size; i++)
+        for (int i = 0; i < oldSize; i++)
         {
-            for (int j = 0; j < size; j++)
+            for (int j = 0; j < oldSize; j++)
             {
                 temp[i][j] = occupantArray[i][j];
             }
@@ -227,6 +219,27 @@ public class UnboundedGrid2<E> extends AbstractGrid<E>
 
         // update the occupantArray and the zie
         occupantArray = temp;
-        size = sizeNeeded;
+        this.size = sizeNeeded;
+    }
+
+    /**
+     * Check if a location is valid.
+     *
+     * @param loc
+     *            the location to check.
+     *
+     */
+    protected void checkLocation(Location loc)
+    {
+        if (loc == null)
+        {
+            throw new IllegalArgumentException("loc == null");
+        }
+
+        if (!isValid(loc))
+        {
+            throw new IllegalArgumentException("Location " + loc
+                    + " is not valid");
+        }
     }
 }
