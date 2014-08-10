@@ -1,26 +1,22 @@
-import info.gridworld.grid.AbstractGrid;
 import info.gridworld.grid.Location;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A SparseBoundedGrid is a rectangular grid with a finite
  * number of rows and columns and a sparse array implementation.
- * This is the LinkedList version.
+ * This is the HashMap version.
  * 
  * @author joyeecheung
  *
  * @param <E>
  *            Type of occupants in the grids.
  */
-public class SparseBoundedGrid2<E> extends AbstractGrid<E>
+public class SparseBoundedGrid2<E> extends AbstractBoundedGrid<E>
 {
-    // the array storing the occupants
-    private ArrayList<LinkedList<OccupantInCol>> occupantArray;
-    private int cols;
-    private int rows;
+    private Map<Location, E> occupantMap;
 
     /**
      * Constructs an empty bounded grid with the given dimensions.
@@ -33,59 +29,8 @@ public class SparseBoundedGrid2<E> extends AbstractGrid<E>
      */
     public SparseBoundedGrid2(int rows, int cols)
     {
-        if (rows <= 0)
-        {
-            throw new IllegalArgumentException("rows <= 0");
-        }
-
-        if (cols <= 0)
-        {
-            throw new IllegalArgumentException("cols <= 0");
-        }
-
-        this.cols = cols;
-        this.rows = rows;
-
-        // initialize the occupant array with LinkedLists
-        occupantArray = new ArrayList<LinkedList<OccupantInCol>>();
-        for (int i = 0; i < rows; i++)
-        {
-            occupantArray.add(new LinkedList<OccupantInCol>());
-        }
-    }
-
-    /**
-     * Get number of rows.
-     * 
-     * @return number of rows.
-     */
-    @Override
-    public int getNumRows()
-    {
-        return rows;
-    }
-
-    /**
-     * Get number of columns.
-     * 
-     * @return number of columns.
-     */
-    @Override
-    public int getNumCols()
-    {
-        return cols;
-    }
-
-    /**
-     * Check if the given location is valid in this grid.
-     * 
-     * @return true if the given location is valid in this grid.
-     */
-    @Override
-    public boolean isValid(Location loc)
-    {
-        return 0 <= loc.getRow() && loc.getRow() < getNumRows()
-                && 0 <= loc.getCol() && loc.getCol() < getNumCols();
+        super(rows, cols);
+        occupantMap = new HashMap<Location, E>();
     }
 
     /**
@@ -98,18 +43,9 @@ public class SparseBoundedGrid2<E> extends AbstractGrid<E>
     public ArrayList<Location> getOccupiedLocations()
     {
         ArrayList<Location> theLocations = new ArrayList<Location>();
-
-        // Look at all grid locations.
-        for (int r = 0; r < getNumRows(); r++)
+        for (Location loc : occupantMap.keySet())
         {
-            LinkedList<OccupantInCol> row = occupantArray.get(r);
-            if (row != null)
-            {
-                for (OccupantInCol occ : row)
-                {
-                    theLocations.add(new Location(r, occ.getCol()));
-                }
-            }
+            theLocations.add(loc);
         }
 
         return theLocations;
@@ -120,35 +56,11 @@ public class SparseBoundedGrid2<E> extends AbstractGrid<E>
      * 
      * @return the content in given location.
      */
-    @SuppressWarnings("unchecked")
     @Override
     public E get(Location loc)
     {
-        if (loc == null)
-        {
-            throw new IllegalArgumentException("loc == null");
-        }
-
-        if (!isValid(loc))
-        {
-            throw new IllegalArgumentException("Location " + loc
-                    + " is not valid");
-        }
-
-        int targetCol = loc.getCol();
-
-        LinkedList<OccupantInCol> row = occupantArray.get(loc.getRow());
-        if (row != null)
-        {
-            for (OccupantInCol occ : row)
-            {
-                if (occ.getCol() == targetCol)
-                {
-                    return (E) occ.getOccupant();
-                }
-            }
-        }
-        return null;
+        checkLocation(loc);
+        return occupantMap.get(loc);
     }
 
     /**
@@ -159,16 +71,7 @@ public class SparseBoundedGrid2<E> extends AbstractGrid<E>
     @Override
     public E put(Location loc, E obj)
     {
-        if (loc == null)
-        {
-            throw new IllegalArgumentException("loc == null");
-        }
-
-        if (!isValid(loc))
-        {
-            throw new IllegalArgumentException("Location " + loc
-                    + " is not valid");
-        }
+        checkLocation(loc);
 
         if (obj == null)
         {
@@ -176,12 +79,7 @@ public class SparseBoundedGrid2<E> extends AbstractGrid<E>
         }
 
         //Add the object to the grid.
-        E oldOccupant = remove(loc);
-        int targetRow = loc.getRow();
-        int targetCol = loc.getCol();
-        LinkedList<OccupantInCol> row = occupantArray.get(targetRow);
-        row.add(new OccupantInCol(obj, targetCol));
-        return oldOccupant;
+        return occupantMap.put(loc, obj);
     }
 
     /**
@@ -192,16 +90,7 @@ public class SparseBoundedGrid2<E> extends AbstractGrid<E>
     @Override
     public E remove(Location loc)
     {
-        if (loc == null)
-        {
-            throw new IllegalArgumentException("loc == null");
-        }
-
-        if (!isValid(loc))
-        {
-            throw new IllegalArgumentException("Location " + loc
-                    + " is not valid");
-        }
+        checkLocation(loc);
 
         E obj = get(loc);
 
@@ -211,21 +100,6 @@ public class SparseBoundedGrid2<E> extends AbstractGrid<E>
             return null;
         }
 
-        LinkedList<OccupantInCol> row = occupantArray.get(loc.getRow());
-
-        int targetCol = loc.getCol();
-
-        // assert: row != null
-        Iterator<OccupantInCol> it = row.iterator();
-        while (it.hasNext())
-        {
-            if (it.next().getCol() == targetCol)
-            {
-                it.remove();
-                break;
-            }
-        }
-
-        return obj;
+        return occupantMap.remove(loc);
     }
 }

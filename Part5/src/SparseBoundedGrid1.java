@@ -1,40 +1,48 @@
 import info.gridworld.grid.Location;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
 
 /**
  * A SparseBoundedGrid is a rectangular grid with a finite
  * number of rows and columns and a sparse array implementation.
- * This is the hand written linked list version.
- *
+ * This is the LinkedList version.
+ * 
  * @author joyeecheung
  *
  * @param <E>
  *            Type of occupants in the grids.
  */
-public class SparseBoundedGrid<E> extends AbstractBoundedGrid<E>
+public class SparseBoundedGrid1<E> extends AbstractBoundedGrid<E>
 {
     // the array storing the occupants
-    private SparseGridNode[] occupantArray;
+    private ArrayList<LinkedList<OccupantInCol>> occupantArray;
 
     /**
-     * Constructs an empty sparse bounded grid with the given dimensions.
+     * Constructs an empty bounded grid with the given dimensions.
      * (Precondition: <code>rows > 0</code> and <code>cols > 0</code>.)
-     *
+     * 
      * @param rows
      *            number of rows in BoundedGrid
      * @param cols
      *            number of columns in BoundedGrid
      */
-    public SparseBoundedGrid(int rows, int cols)
+    public SparseBoundedGrid1(int rows, int cols)
     {
         super(rows, cols);
-        occupantArray = new SparseGridNode[rows];
+
+        // initialize the occupant array with LinkedLists
+        occupantArray = new ArrayList<LinkedList<OccupantInCol>>();
+        for (int i = 0; i < rows; i++)
+        {
+            occupantArray.add(new LinkedList<OccupantInCol>());
+        }
     }
 
     /**
      * Get occupied locations in this grid.
-     *
+     * 
      * @return an ArrayList of Location containing occupied
      *         locations in this grid.
      */
@@ -45,14 +53,15 @@ public class SparseBoundedGrid<E> extends AbstractBoundedGrid<E>
         int rows = getNumRows();
 
         // Look at all grid locations.
-        for (int i = 0; i < rows; i++)
+        for (int r = 0; r < rows; r++)
         {
-            SparseGridNode node = occupantArray[i];
-            while (node != null)
+            LinkedList<OccupantInCol> row = occupantArray.get(r);
+            if (row != null)
             {
-                Location loc = new Location(i, node.getCol());
-                theLocations.add(loc);
-                node = node.getNext();
+                for (OccupantInCol occ : row)
+                {
+                    theLocations.add(new Location(r, occ.getCol()));
+                }
             }
         }
 
@@ -61,7 +70,7 @@ public class SparseBoundedGrid<E> extends AbstractBoundedGrid<E>
 
     /**
      * Get the content in given location.
-     *
+     * 
      * @return the content in given location.
      */
     @SuppressWarnings("unchecked")
@@ -69,25 +78,26 @@ public class SparseBoundedGrid<E> extends AbstractBoundedGrid<E>
     public E get(Location loc)
     {
         checkLocation(loc);
-        
-        SparseGridNode node = occupantArray[loc.getRow()];
 
-        // find the object in the linked list
-        while (node != null)
+        int targetCol = loc.getCol();
+
+        LinkedList<OccupantInCol> row = occupantArray.get(loc.getRow());
+        if (row != null)
         {
-            if (loc.getCol() == node.getCol())
+            for (OccupantInCol occ : row)
             {
-                return (E) node.getOccupant();
+                if (occ.getCol() == targetCol)
+                {
+                    return (E) occ.getOccupant();
+                }
             }
-            node = node.getNext();
         }
-
         return null;
     }
 
     /**
      * Put the given object in given location.
-     *
+     * 
      * @return the original content in the location.
      */
     @Override
@@ -100,19 +110,18 @@ public class SparseBoundedGrid<E> extends AbstractBoundedGrid<E>
             throw new IllegalArgumentException("obj == null");
         }
 
-        // Add the object to the grid.
+        //Add the object to the grid.
         E oldOccupant = remove(loc);
-        int row = loc.getRow();
-        int col = loc.getCol();
-        SparseGridNode node = occupantArray[row];
-        occupantArray[row] = new SparseGridNode(obj, col, node);
-
+        int targetRow = loc.getRow();
+        int targetCol = loc.getCol();
+        LinkedList<OccupantInCol> row = occupantArray.get(targetRow);
+        row.add(new OccupantInCol(obj, targetCol));
         return oldOccupant;
     }
 
     /**
      * Remove the occupants in given location.
-     *
+     * 
      * @return the original content in the location.
      */
     @Override
@@ -128,34 +137,18 @@ public class SparseBoundedGrid<E> extends AbstractBoundedGrid<E>
             return null;
         }
 
-        // Remove the object from the grid.
-        int targetRow = loc.getRow();
+        LinkedList<OccupantInCol> row = occupantArray.get(loc.getRow());
+
         int targetCol = loc.getCol();
-        SparseGridNode target = occupantArray[targetRow];
 
-        // assert: target != null
-        // The head of the linked list is the object
-        if (target.getCol() == targetCol)
+        // assert: row != null
+        Iterator<OccupantInCol> it = row.iterator();
+        while (it.hasNext())
         {
-            // move the next one ahead
-            occupantArray[targetRow] = target.getNext();
-        }
-        else
-        {
-            // target marks the previous node of the node being checked
-            // cur is the node being checked
-            SparseGridNode cur = target.getNext();
-            while (cur != null && cur.getCol() != targetCol)
+            if (it.next().getCol() == targetCol)
             {
-                target = target.getNext();
-                cur = cur.getNext();
-            }
-
-            // remove the found occupant
-            if (cur != null)
-            {
-                // let the previous node point to the next node
-                target.setNext(cur.getNext());
+                it.remove();
+                break;
             }
         }
 
