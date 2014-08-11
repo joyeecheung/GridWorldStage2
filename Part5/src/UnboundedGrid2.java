@@ -199,9 +199,13 @@ public class UnboundedGrid2<E> extends AbstractGrid<E>
     private void resize(Location loc)
     {
         int oldSize = getSize();
+
         // double both array bounds until they are large enough
         int sizeNeeded = oldSize;
-        while (loc.getRow() >= sizeNeeded || loc.getCol() >= sizeNeeded)
+        int targetRow = loc.getRow();
+        int targetCol = loc.getCol();
+
+        while (targetRow >= sizeNeeded || targetCol >= sizeNeeded)
         {
             sizeNeeded *= 2;
         }
