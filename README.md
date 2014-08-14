@@ -32,12 +32,13 @@ After adding libraries:
     └── test
         └── JumperTest.java
 
-###Ant Targets
+##Ant Targets
 * `ant`: compile
 * `ant run`: run the program
 * `ant test`: run JUnit tests
 * `ant report`: generate JUnit test reports
 
 ##About
-Author: Joyee Cheung
-Time: 2014 Summer
+* Author: Joyee Cheung
+* Time: 2014 Summer
+* The Jumper.gif of Part3 is created by Zheng Ankai
